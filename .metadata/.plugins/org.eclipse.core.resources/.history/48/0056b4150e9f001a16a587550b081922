@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>2페이지목록 요청하기</title>
+</head>
+<body>
+	<a href="boardList?page=2">2page</a>
+</body>
+</html>

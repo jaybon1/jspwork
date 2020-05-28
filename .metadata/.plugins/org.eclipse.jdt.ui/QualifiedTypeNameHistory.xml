@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.lang.StrictMath"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+<fullyQualifiedTypeName name="com.google.gson.Gson"/>
+<fullyQualifiedTypeName name="com.cos.ch03.User"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="lombok.Data"/>
+<fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
+<fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+<fullyQualifiedTypeName name="org.junit.Test"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="com.cos.blog.db.DBConn"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.cos.blog.model.Board"/>
+<fullyQualifiedTypeName name="com.cos.blog.model.Reply"/>
+<fullyQualifiedTypeName name="com.cos.blog.action.user.UsersJoinAction"/>
+<fullyQualifiedTypeName name="com.cos.blog.action.user.UsersJoinProcAction"/>
+<fullyQualifiedTypeName name="com.cos.blog.action.Action"/>
+<fullyQualifiedTypeName name="com.cos.blog.model.RoleType"/>
+<fullyQualifiedTypeName name="com.cos.blog.model.Users"/>
+<fullyQualifiedTypeName name="com.cos.blog.repository.UsersRepository"/>
+<fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+<fullyQualifiedTypeName name="java.io.PrintWriter"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="com.cos.blog.util.Script"/>
+</qualifiedTypeNameHistroy>
