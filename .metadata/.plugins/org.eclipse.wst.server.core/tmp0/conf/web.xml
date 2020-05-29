@@ -4699,6 +4699,7 @@
         <mime-type>application/vnd.handheld-entertainment+xml</mime-type>
     </mime-mapping>
 
+
     <servlet>
         <servlet-name>FrontController</servlet-name>
         <servlet-class>com.cos.test.FrontController</servlet-class>

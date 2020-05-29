@@ -36,6 +36,7 @@ public class UsersRepository {
 
 			conn = DBConn.getConnection();
 			pstmt = conn.prepareStatement(SQL);
+			
 			// 여기에 물음표 완성하기
 			pstmt.setString(1, user.getUsername());
 			pstmt.setString(2, user.getPassword());

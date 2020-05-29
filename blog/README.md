@@ -1,4 +1,4 @@
-#### JSP 모델2 블로그 프로젝트
+# JSP 모델2 블로그 프로젝트
 
 ## 오라클 사용자 생성
 ```sql
@@ -10,10 +10,6 @@ GRANT CREATE TABLESPACE TO cos;
 GRANT CREATE TABLE TO cos;
 GRANT select, insert, delete, update on cos.player TO cos;
 alter user cos default tablespace users quota unlimited on users;
-
-관련주소 :
-https://ondolroom.tistory.com/162
-
 ```
 
 ## 테이블
@@ -64,3 +60,6 @@ CREATE SEQUENCE REPLY_SEQ
     START WITH 1
     INCREMENT BY 1;
 ```
+
+## 관련주소 :
+https://ondolroom.tistory.com/162
