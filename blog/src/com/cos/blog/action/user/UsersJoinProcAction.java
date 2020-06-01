@@ -7,6 +7,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.cos.blog.action.Action;
 import com.cos.blog.model.RoleType;
@@ -14,56 +15,58 @@ import com.cos.blog.model.Users;
 import com.cos.blog.repository.UsersRepository;
 import com.cos.blog.util.Script;
 
-public class UsersJoinProcAction implements Action  {
-	
-	// 컨트롤러가 해야될 일들을 위임해서 다른 클래스가 일을 하게 하는 것을 팩토리패턴이라고 한다
+// join 실행파일
+public class UsersJoinProcAction implements Action{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		// 0. // 페이지 오류를 막기위해(공격 등) 유효성 검사부터 해야한다
-		if(request.getParameter("username").equals("") ||
-				request.getParameter("username") == null ||
-				request.getParameter("password").equals("") ||
-				request.getParameter("password") == null ||
-				request.getParameter("email").equals("") ||
+	
+		// 0. 유효성 검사
+		if
+		(
+				request.getParameter("username").equals("")|| // 공백
+				request.getParameter("username") == null|| // 값이 X
+				request.getParameter("password").equals("")||
+				request.getParameter("password") == null||
+				request.getParameter("email").equals("")||
 				request.getParameter("email") == null ||
-				request.getParameter("address").equals("") ||
-				request.getParameter("address") == null) {
-			
-			// 로그하나 남겨야함
-			return;
-			
+				request.getParameter("address").equals("")||
+				request.getParameter("address") == null
+				
+		) {
+			return; // 위의 사항 중 하나라도 해당되면 아예 실행이 안되게 설정
 		}
 		
-		// 1. 파라메터 받기 (x-www-form-urlencoded)라는 MIME타입 key=value
+		// 1. parameter 받기 (X-www.form-urlencoded 라는 MIME 타입 key=value)
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		String email = request.getParameter("email"); // postman등으로 공격하면 형식에 맞지않게 보낼수 있기 때문에 유효성체크 해줘야한다(지금은 안함)
+		String email = request.getParameter("email"); // e-mail 형식에 대한 유효성 검사도 시행해줘야함
 		String address = request.getParameter("address");
-		String userRole = RoleType.USER.toString();
-		
+		String userRole = RoleType.USER.toString(); // 마음대로 넣는 걸 방지하기 위해 enum으로 설정
 		
 		// 2. User 오브젝트 변환
 		Users user = Users.builder()
-				.username(username)
-				.password(password)
-				.email(email)
-				.address(address)
-				.userRole(userRole)
-				.build();
+					.username(username)
+					.password(password)
+					.email(email)
+					.address(address)
+					.userRole(userRole)
+					.build();
 		
+		// 3. DB연결 - UserRepository의 save() 호출
+		UsersRepository userRepository = UsersRepository.getInstance();
+		int result = userRepository.save(user);
 		
-		// 3. DB 연결 - UserRepository의 save() 호출
-		UsersRepository usersRepository = UsersRepository.getInstance();
-		int result = usersRepository.save(user);
+
 		
 		// 4. index.jsp 페이지로 이동
 		if(result == 1) {
-			RequestDispatcher dis = request.getRequestDispatcher("index.jsp");
-			dis.forward(request, response);
-		} else {
+//			response.sendRedirect("/blog/user?cmd=login"); //거의 안씀
+//			RequestDispatcher dis = request.getRequestDispatcher("user/login.jsp");
+//			dis.forward(request, response);
+			Script.href("회원가입에 성공하였습니다.", "/blog/user?cmd=login", response);
+		}else {
 			Script.back("회원가입에 실패하였습니다.", response);
 		}
-			
+		
 	}
 }

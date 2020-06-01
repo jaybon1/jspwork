@@ -12,14 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Users {
-	
 	private int id;
 	private String username;
 	private String password;
 	private String email;
-	private	String address;
-	private String userProfile;
+	private String address;
+	private String userprofile;
 	private String userRole;
 	private Timestamp createDate;
-	
 }

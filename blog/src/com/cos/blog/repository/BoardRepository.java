@@ -3,6 +3,7 @@ package com.cos.blog.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +12,7 @@ import com.cos.blog.model.Board;
 import com.cos.blog.model.Users;
 
 public class BoardRepository {
-
-	private static final String TAG = "BoardRepository : ";
-
-	// 싱글톤
+	private static final String TAG = "BoardRepository : "; // TAG 생성 (오류 발견시 용이)
 	private static BoardRepository instance = new BoardRepository();
 
 	private BoardRepository() {
@@ -28,120 +26,95 @@ public class BoardRepository {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 
-	public int save(Board board) {
-
+	// 글쓰기
+	public int save(Board board) { // object 받기(안에 내용 다 받아야 하니까)
 		final String SQL = "";
-
 		try {
-
-			conn = DBConn.getConnection();
+			conn = DBConn.getConnection(); // DB에 연결
 			pstmt = conn.prepareStatement(SQL);
-			// 여기에 물음표 완성하기
-
+			// 물음표 완성하기
 			return pstmt.executeUpdate();
-
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(TAG + "save : " + e.getMessage());
 		} finally {
-			DBConn.close(conn, pstmt);
+			DBConn.close(conn, pstmt, rs);
 		}
-
-		return -1;
+		return -1; // 실패시
 	}
 
-	public int update(Board board) {
-
+	// 회원정보 수정
+	public int update(Board board) { // object 받기(안에 내용 다 받아야 하니까)
 		final String SQL = "";
-
 		try {
-
-			conn = DBConn.getConnection();
+			conn = DBConn.getConnection(); // DB에 연결
 			pstmt = conn.prepareStatement(SQL);
-			// 여기에 물음표 완성하기
-
+			// 물음표 완성하기
 			return pstmt.executeUpdate();
-
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(TAG + "update : " + e.getMessage());
+			System.out.println(TAG + "Update : " + e.getMessage());
 		} finally {
-			DBConn.close(conn, pstmt);
+			DBConn.close(conn, pstmt, rs);
 		}
-
-		return -1;
+		return -1; // 실패시
 	}
 
-	public int deleteById(int id) {
-
+	// 회원정보 삭제
+	public int deleteById(int id) { // object 받기(안에 내용 다 받아야 하니까)
 		final String SQL = "";
-
 		try {
-
-			conn = DBConn.getConnection();
+			conn = DBConn.getConnection(); // DB에 연결
 			pstmt = conn.prepareStatement(SQL);
-			// 여기에 물음표 완성하기
-
+			// 물음표 완성하기
 			return pstmt.executeUpdate();
-
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(TAG + "deleteById : " + e.getMessage());
+			System.out.println(TAG + "Delete : " + e.getMessage());
 		} finally {
-			DBConn.close(conn, pstmt);
+			DBConn.close(conn, pstmt, rs);
 		}
-
-		return -1;
+		return -1; // 실패시
 	}
-	
-	public List<Board> findAll() {
 
+	// 회원정보 다 찾기
+	public List<Board> findAll() { // object 받기(안에 내용 다 받아야 하니까)
 		final String SQL = "";
 		List<Board> boards = new ArrayList<>();
-
 		try {
-
-			conn = DBConn.getConnection();
+			conn = DBConn.getConnection(); // DB에 연결
 			pstmt = conn.prepareStatement(SQL);
-			
-			// 여기에 물음표 완성하기
-			// while 돌려서 rs -> java 오브젝트에 집어넣기
+			// 물음표 완성하기
 
+			// while 돌려서 rs -> java오브젝트에 집어넣기
 			return boards;
-
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(TAG + "findAll : " + e.getMessage());
 		} finally {
 			DBConn.close(conn, pstmt, rs);
 		}
-
-		return null;
+		return null; // 실패시
 	}
-	
-	public Board findById(int id) {
 
+	// 회원정보 한 건 찾기
+	public Board findById(int id) { // object 받기(안에 내용 다 받아야 하니까)
 		final String SQL = "";
 		Board board = new Board();
-
 		try {
-
-			conn = DBConn.getConnection();
+			conn = DBConn.getConnection(); // DB에 연결
 			pstmt = conn.prepareStatement(SQL);
-			
-			// 여기에 물음표 완성하기
-			// if 해서 rs -> java 오브젝트에 집어넣기
+			// 물음표 완성하기
 
+			// if 돌려서 rs -> java오브젝트에 집어넣기
 			return board;
-
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(TAG + "findById : " + e.getMessage());
 		} finally {
 			DBConn.close(conn, pstmt, rs);
 		}
-
-		return null;
+		return null; // 실패시
 	}
-
+	
 }

@@ -11,48 +11,39 @@ import javax.sql.DataSource;
 public class DBConn {
 	public static Connection getConnection() {
 		try {
-			
 			Context initContext = new InitialContext();
-			Context envContext  = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/myoracle");
+			Context envContext = (Context) initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource) envContext.lookup("jdbc/myoracle");
 			Connection conn = ds.getConnection();
-			
+			PreparedStatement pstmt;
+			ResultSet rs;
+			System.out.println("DBConn : 데이터베이스 연결성공");
 			return conn;
-			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("DBConn : 데이터베이스 연결 실패");
-			System.out.println("DBConn : Message" + e.getMessage());
+			System.out.println("DBConn : 데이터베이스 연결실패");
+			System.out.println("DBConn : Message : " + e.getMessage());
 		}
 		return null;
 	}
-	
+
 	public static void close(Connection conn, PreparedStatement pstmt) {
 		try {
-			if(conn != null) {
-				conn.close();				
-			}
-			if(pstmt != null) {			
-				pstmt.close();
-			}
+			conn.close();
+			pstmt.close();
 		} catch (Exception e) {
-			System.out.println("DB종료시 오류가 발생 : " +e.getMessage());
+			System.out.println("DB종료시 오류가 발생 : " + e.getMessage());
 		}
 	}
-	
+
 	public static void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
 		try {
-			if(conn != null) {
-				conn.close();				
-			}
-			if(pstmt != null) {			
-				pstmt.close();
-			}
-			if(rs != null) {			
-				rs.close();
-			}
+			conn.close();
+			pstmt.close();
+			rs.close();
 		} catch (Exception e) {
-			System.out.println("DB종료시 오류가 발생 : " +e.getMessage());
+			System.out.println("DB종료시 오류가 발생 : " + e.getMessage());
 		}
 	}
+
 }

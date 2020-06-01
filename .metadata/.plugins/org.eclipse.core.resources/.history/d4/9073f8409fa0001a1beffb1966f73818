@@ -1,7 +1,0 @@
-package com.cos.blog.action.user;
-
-public class UsersJoinAction {
-	public void execute() {
-		
-	}
-}

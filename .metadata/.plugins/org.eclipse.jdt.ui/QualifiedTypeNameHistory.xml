@@ -24,11 +24,8 @@
 <fullyQualifiedTypeName name="com.cos.blog.action.user.UsersJoinAction"/>
 <fullyQualifiedTypeName name="com.cos.blog.action.user.UsersLoginAction"/>
 <fullyQualifiedTypeName name="com.cos.blog.action.board.BoardHomeAction"/>
-<fullyQualifiedTypeName name="com.cos.blog.action.Action"/>
 <fullyQualifiedTypeName name="com.cos.blog.action.user.UsersLoginProcAction"/>
 <fullyQualifiedTypeName name="com.cos.blog.repository.UsersRepository"/>
-<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
-<fullyQualifiedTypeName name="com.cos.blog.util.Script"/>
 <fullyQualifiedTypeName name="java.sql.Timestamp"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
@@ -39,4 +36,9 @@
 <fullyQualifiedTypeName name="com.love.blog.action.users.UsersJoinAction"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+<fullyQualifiedTypeName name="com.cos.blog.action.user.UsersLogoutAction"/>
+<fullyQualifiedTypeName name="com.cos.blog.action.Action"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="com.cos.blog.util.Script"/>
+<fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
 </qualifiedTypeNameHistroy>

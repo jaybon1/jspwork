@@ -153,19 +153,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="C:\src\jspwork\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\src\jspwork\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\blog2" path="/blog2" reloadable="true" source="org.eclipse.jst.jee.server:blog2">
-
-<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/myoracle" password="bitc5600" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="love"/>
-
-</Context><Context docBase="C:\src\jspwork\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\blog3" path="/blog3" reloadable="true" source="org.eclipse.jst.jee.server:blog3">
-
-<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/myoracle" password="bitc5600" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="love"/>
-
-</Context><Context docBase="C:\src\jspwork\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\satBlog" path="/satBlog" reloadable="true" source="org.eclipse.jst.jee.server:satBlog">
-
-<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/myoracle" password="bitc5600" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="love"/>
-
-</Context><Context docBase="C:\src\jspwork\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\bloghs" path="/bloghs" reloadable="true" source="org.eclipse.jst.jee.server:bloghs">
+      <Context docBase="C:\src\jspwork\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\src\jspwork\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\blog" path="/blog" reloadable="true" source="org.eclipse.jst.jee.server:blog">
 <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/myoracle" password="bitc5600" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="cos"/>
 </Context></Host>
     </Engine>
