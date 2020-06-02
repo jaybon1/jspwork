@@ -1,19 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Request Test3</title>
 <style>
-	h1{
-		text-align: center;
-	}
-	table{
-		margin:auto;
-		width:700px;
-		border:1px solid red;
-	}
+h1 {
+	text-align: center;
+}
+
+table {
+	margin: auto;
+	width: 700px;
+	border: 1px solid red;
+}
 </style>
 </head>
 <body>
@@ -22,22 +23,21 @@
 		<tr>
 			<td>쿠키정보</td>
 			<%
-			Cookie[] cookie = request.getCookies();
-			if(cookie == null){
+				Cookie[] cookie = request.getCookies();
+				if (cookie == null) {
 			%>
 			<td>쿠키가 존재하지 않습니다.</td>
-			<% 
-			}else{
-				for(int i = 0; i<cookie.length; i++){
-					%>
-					<td><%=cookie[i].getName() %>(<%=cookie[i].getValue(
-				)%>)&nbsp; &nbsp; </td>
 			<%
-			}
-			}
+				} else {
+					for (int i = 0; i < cookie.length; i++) {
+			%>
+			<td><%=cookie[i].getName()%>(<%=cookie[i].getValue()%>)&nbsp; &nbsp;</td>
+			<%
+				}
+				}
 			%>
 		</tr>
-		
+
 		<tr>
 			<td>서버 도메인명</td>
 			<td><%=request.getServerName() %></td>

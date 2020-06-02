@@ -21,7 +21,7 @@
 			<a href="#" class="btn btn-primary">상세보기</a>
 		</div>
 	</div>
-	
+
 
 	<div class="card m-2" style="width: 100%">
 		<div class="card-body">
