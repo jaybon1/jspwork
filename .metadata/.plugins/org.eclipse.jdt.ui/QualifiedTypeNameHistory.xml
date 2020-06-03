@@ -17,7 +17,6 @@
 <fullyQualifiedTypeName name="com.cos.blog.action.user.UsersJoinProcAction"/>
 <fullyQualifiedTypeName name="com.cos.blog.model.RoleType"/>
 <fullyQualifiedTypeName name="com.cos.blog.model.Users"/>
-<fullyQualifiedTypeName name="java.io.PrintWriter"/>
 <fullyQualifiedTypeName name="com.cos.blog.action.user.UsersJoinAction"/>
 <fullyQualifiedTypeName name="com.cos.blog.action.user.UsersLoginAction"/>
 <fullyQualifiedTypeName name="com.cos.blog.action.board.BoardHomeAction"/>
@@ -31,14 +30,16 @@
 <fullyQualifiedTypeName name="com.love.blog.action.Action"/>
 <fullyQualifiedTypeName name="com.love.blog.action.users.UsersJoinProcAction"/>
 <fullyQualifiedTypeName name="com.love.blog.action.users.UsersJoinAction"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
 <fullyQualifiedTypeName name="com.cos.blog.action.user.UsersLogoutAction"/>
-<fullyQualifiedTypeName name="com.cos.blog.action.Action"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 <fullyQualifiedTypeName name="com.cos.blog.util.Script"/>
 <fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
 <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
 <fullyQualifiedTypeName name="lombok.Data"/>
 <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
+<fullyQualifiedTypeName name="com.cos.blog.action.Action"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="com.cos.blog.action.user.UsersUsernameCheckAction"/>
+<fullyQualifiedTypeName name="java.io.PrintWriter"/>
 </qualifiedTypeNameHistroy>

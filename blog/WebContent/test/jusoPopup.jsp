@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,33 +24,32 @@ function init(){
 	var url = location.href; // 자기주소  ~/jusoPopup.jsp
 	var confmKey = "devU01TX0FVVEgyMDIwMDYwMjA5NDkwMjEwOTgyMDE=";
 	var resultType = "4"; // 도로명주소 검색결과 화면 출력내용, 1 : 도로명, 2 : 도로명+지번, 3 : 도로명+상세건물명, 4 : 도로명+지번+상세건물명
-	var inputYn= "<%=inputYn%>";
+	var inputYn = "<%=inputYn%>";
 	if(inputYn != "Y"){
 		document.form.confmKey.value = confmKey;
 		document.form.returnUrl.value = url;
 		document.form.resultType.value = resultType;
 		document.form.action="http://www.juso.go.kr/addrlink/addrLinkUrl.do"; //인터넷망
 		//document.form.action="http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do"; //모바일 웹인 경우, 인터넷망
-		document.form.submit();
+// 		document.form.submit();
 		
 		// 서버로 부터 응답 받으면 무조건 새창이다(html 새로 로딩됨)
 		
 	}else{
-		opener.jusoCallBack("<%=roadFullAddr%>
+			opener.jusoCallBack("<%=roadFullAddr%>
 	");
 			window.close();
 		}
 	}
 </script>
-<body onload="init();">
+<body onload="init()">
 	<br />
 	<h1>원래주소!</h1>
 	<br />
-
 	<form id="form" name="form" method="post">
-		<input type="hidden" id="confmKey" name="confmKey" value="" /> <input
-			type="hidden" id="returnUrl" name="returnUrl" value="" /> <input
-			type="hidden" id="resultType" name="resultType" value="" />
+		<input type="text" id="confmKey" name="confmKey" value="" /> 
+		<input type="text" id="returnUrl" name="returnUrl" value="" /> <input type="text" id="resultType" name="resultType" value="" /> 
+			<input type="submit" value="click">
 		<!-- 해당시스템의 인코딩타입이 EUC-KR일경우에만 추가 START-->
 		<!-- 
 		<input type="hidden" id="encodingType" name="encodingType" value="EUC-KR"/>

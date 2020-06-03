@@ -34,17 +34,16 @@ function init(){
 		//document.form.action="http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do"; //모바일 웹인 경우, 인터넷망
 		document.form.submit();
 	}else{
-		opener.jusoCallBack("<%=roadFullAddr%>
-	");
+		opener.jusoCallBack("<%=roadFullAddr%>");
 			window.close();
 		}
 	}
 </script>
 <body onload="init();">
 	<form id="form" name="form" method="post">
-		<input type="hidden" id="confmKey" name="confmKey" value="" /> <input
-			type="hidden" id="returnUrl" name="returnUrl" value="" /> <input
-			type="hidden" id="resultType" name="resultType" value="" />
+		<input type="hidden" id="confmKey" name="confmKey" value="" /> 
+		<input type="hidden" id="returnUrl" name="returnUrl" value="" /> 
+		<input type="hidden" id="resultType" name="resultType" value="" />
 		<!-- 해당시스템의 인코딩타입이 EUC-KR일경우에만 추가 START-->
 		<!-- 
 		<input type="hidden" id="encodingType" name="encodingType" value="EUC-KR"/>

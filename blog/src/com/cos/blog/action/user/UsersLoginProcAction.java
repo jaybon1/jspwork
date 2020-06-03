@@ -41,7 +41,15 @@ public class UsersLoginProcAction implements Action {
 			session.setAttribute("principal", user); // 인증 주체
 			
 			if(request.getParameter("remember") != null) { // null이 아니면 무조건 체크박스를 체크했다는 것!
-				Cookie cookie = new Cookie("remember", user.getUsername());
+				
+//				Cookie cookie = new Cookie("remember", user.getUsername());
+//				response.addCookie(cookie);
+				
+				response.setHeader("Set-Cookie", "remember=" + user.getUsername());
+				
+			} else {
+				Cookie cookie = new Cookie("remember", null);
+				cookie.setMaxAge(0);
 				response.addCookie(cookie);
 			}
 			
@@ -54,3 +62,13 @@ public class UsersLoginProcAction implements Action {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
