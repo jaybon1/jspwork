@@ -28,10 +28,14 @@ public class BoardRepository {
 
 	// 글쓰기
 	public int save(Board board) { // object 받기(안에 내용 다 받아야 하니까)
-		final String SQL = "";
+		final String SQL = "INSERT INTO board(id, userid, title, content, createDate) "
+				+ "VALUES(BOARD_SEQ.nextval,?,?,?,sysdate)";
 		try {
 			conn = DBConn.getConnection(); // DB에 연결
 			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, board.getUserId());
+			pstmt.setString(2, board.getTitle());
+			pstmt.setString(3, board.getContent());
 			// 물음표 완성하기
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -79,14 +83,28 @@ public class BoardRepository {
 
 	// 회원정보 다 찾기
 	public List<Board> findAll() { // object 받기(안에 내용 다 받아야 하니까)
-		final String SQL = "";
+		final String SQL = "SELECT id, userid, title, content, readcount, createdate FROM board ORDER BY id DESC";
 		List<Board> boards = new ArrayList<>();
 		try {
 			conn = DBConn.getConnection(); // DB에 연결
 			pstmt = conn.prepareStatement(SQL);
-			// 물음표 완성하기
-
+			rs = pstmt.executeQuery();
+			
 			// while 돌려서 rs -> java오브젝트에 집어넣기
+			while (rs.next()) {
+				System.out.println(rs.getInt(1));
+				Board board = Board.builder()
+						.id(rs.getInt(1))
+						.userId(rs.getInt(2))
+						.title(rs.getString(3))
+						.content(rs.getString(4))
+						.readCount(rs.getInt(5))
+						.createDate(rs.getTimestamp(6))
+						.build();
+				
+				boards.add(board);		
+			}
+			
 			return boards;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -97,6 +115,7 @@ public class BoardRepository {
 		return null; // 실패시
 	}
 
+	
 	// 회원정보 한 건 찾기
 	public Board findById(int id) { // object 받기(안에 내용 다 받아야 하니까)
 		final String SQL = "";

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cos.blog.action.Action;
 import com.cos.blog.action.board.BoardHomeAction;
+import com.cos.blog.action.board.BoardWriteAction;
+import com.cos.blog.action.board.BoardWriteProcAction;
 
 // http://localhost:8000/blog/board
 @WebServlet("/board")
@@ -41,6 +43,10 @@ public class BoardController extends HttpServlet {
 		if(cmd.equals("home")) {
 			// 회원가입 페이지로 이동
 			return new BoardHomeAction(); //Board의 목록
+		} else if(cmd.equals("write")){
+			return new BoardWriteAction();
+		} else if(cmd.equals("writeProc")){
+			return new BoardWriteProcAction();
 		}
 		return null;
 	}
