@@ -45,5 +45,14 @@
 <fullyQualifiedTypeName name="com.cos.blog.repository.BoardRepository"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.cos.blog.model.Board"/>
+<fullyQualifiedTypeName name="com.nhncorp.lucy.security.xss.XssPreventer"/>
+<fullyQualifiedTypeName name="com.nhncorp.lucy.security.xss.XssSaxFilter"/>
+<fullyQualifiedTypeName name="com.nhncorp.lucy.security.xss.LucyXssFilter"/>
+<fullyQualifiedTypeName name="com.nhncorp.lucy.security.xss.XssFilter"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="org.jsoup.nodes.Document"/>
+<fullyQualifiedTypeName name="org.jsoup.select.Elements"/>
+<fullyQualifiedTypeName name="org.jsoup.nodes.Element"/>
+<fullyQualifiedTypeName name="org.jsoup.Jsoup"/>
+<fullyQualifiedTypeName name="com.cos.blog.util.HtmlParser"/>
 </qualifiedTypeNameHistroy>

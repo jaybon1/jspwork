@@ -92,7 +92,7 @@ public class BoardRepository {
 			
 			// while 돌려서 rs -> java오브젝트에 집어넣기
 			while (rs.next()) {
-				System.out.println(rs.getInt(1));
+				
 				Board board = Board.builder()
 						.id(rs.getInt(1))
 						.userId(rs.getInt(2))
@@ -103,6 +103,7 @@ public class BoardRepository {
 						.build();
 				
 				boards.add(board);		
+				
 			}
 			
 			return boards;
