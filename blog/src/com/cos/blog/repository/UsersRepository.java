@@ -114,11 +114,17 @@ public class UsersRepository {
 
 	// 회원정보 수정
 	public int update(Users user) { // object 받기(안에 내용 다 받아야 하니까)
-		final String SQL = "";
+		final String SQL = "UPDATE users SET password = ?, email = ?, address = ? WHERE id = ? ";
 		try {
 			conn = DBConn.getConnection(); // DB에 연결
 			pstmt = conn.prepareStatement(SQL);
 			// 물음표 완성하기
+		
+			pstmt.setString(1, user.getPassword());
+			pstmt.setString(2, user.getEmail());
+			pstmt.setString(3, user.getAddress());
+			pstmt.setInt(4, user.getId());
+			
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

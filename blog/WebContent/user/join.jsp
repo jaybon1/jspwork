@@ -32,7 +32,7 @@
 			<div class="invalid-feedback">Please fill out this field.</div>
 		</div>
 
-		<button type="submit" class="btn btn-primary">회원가입 완료</button>
+		<button type="submit" class="btn btn-primary">회원가입</button>
 	</form>
 </div>
 

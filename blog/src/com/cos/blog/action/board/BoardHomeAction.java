@@ -26,7 +26,8 @@ public class BoardHomeAction implements Action {
 				String preview = HtmlParser.getContentPreview(board.getContent());
 				board.setContent(preview);
 				
-			}			
+			}
+
 		}
 		
 		request.setAttribute("boards", boards);
@@ -37,4 +38,3 @@ public class BoardHomeAction implements Action {
 	}
 
 }
-

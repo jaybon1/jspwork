@@ -31,9 +31,19 @@
   
   <div class="form-group form-check">
     <label class="form-check-label">
-      <input class="form-check-input" type="checkbox" name="remember"> 아이디 저장
+    
+    <c:choose>
+    	<c:when test="${empty cookie.remember}">
+    		<input class="form-check-input" type="checkbox" name="remember"> 아이디 저장
+    	</c:when>
+    	<c:otherwise>
+    		<input class="form-check-input" type="checkbox" name="remember" checked> 아이디 저장
+    	</c:otherwise>
+    </c:choose>
+    
 <!--       <div class="valid-feedback">Valid.</div> -->
 <!--       <div class="invalid-feedback">Check this checkbox to continue.</div> -->
+
     </label>
   </div>
   <button type="submit" class="btn btn-primary">로그인</button>

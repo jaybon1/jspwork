@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.cos.blog.action.Action;
 import com.cos.blog.model.Users;
 import com.cos.blog.repository.UsersRepository;
+import com.cos.blog.util.Script;
 
 public class UsersUsernameCheckAction implements Action {
 
@@ -26,13 +27,10 @@ public class UsersUsernameCheckAction implements Action {
 		}
 		
 		UsersRepository userRepository = UsersRepository.getInstance();
-		int temp = userRepository.findByUsername(username);
+		int result = userRepository.findByUsername(username);
 		
-		out.print(temp); // println을 쓰면 엔터키가 들어가기 때문에 주의
-		
-		// ajax 로 출력
+		Script.outText(result + "", response);
 		
 	}
-	
 }
 

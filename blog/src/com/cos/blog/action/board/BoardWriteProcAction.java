@@ -26,7 +26,6 @@ public class BoardWriteProcAction implements Action {
 			return;
 
 		}
-		;
 
 //		1번 request에 title값과 content값 null인지 공백인지확인
 		if (request.getParameter("title") == null || request.getParameter("title").equals("")) {
