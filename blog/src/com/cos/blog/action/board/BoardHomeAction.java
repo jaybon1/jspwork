@@ -18,7 +18,10 @@ public class BoardHomeAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		BoardRepository boardRepository = BoardRepository.getInstance();
-		List<Board> boards = boardRepository.findAll();
+		System.out.println(Integer.parseInt(request.getParameter("page")));
+		// 2. 3건만 페이징하여 가져오기
+//		List<Board> boards = boardRepository.findAll();
+		List<Board> boards = boardRepository.findThree(Integer.parseInt(request.getParameter("page")));
 		
 		if(boards != null) {
 			for (Board board : boards) {

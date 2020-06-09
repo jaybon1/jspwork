@@ -4,7 +4,7 @@
 
 <div class="container">
 
-	<button type="button" class="btn btn-light" onclick="history.back()">뒤로가기</button>
+	<button type="button" class="btn btn-light" onclick="back(${param.page})">뒤로가기</button>
 
 	<c:if test="${sessionScope.principal.id == dto.board.userId}">
 
@@ -18,7 +18,7 @@
 
 
 	<h6>
-		작성자 : <i>${dto.username}</i>
+		작성자 : <i>${dto.username}</i>  조회수 : <i>${dto.board.readCount}</i>
 	</h6>
 
 	<br />

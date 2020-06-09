@@ -55,7 +55,7 @@ public class BoardWriteProcAction implements Action {
 		int result = boardRepository.save(board);
 
 		if (result == 1) {
-			Script.href("글 등록에 성공하였습니다.", "/blog/board?cmd=home", response);
+			Script.href("글 등록에 성공하였습니다.", "/blog/index.jsp", response);
 		} else {
 			Script.back("글 등록에 실패하였습니다. 제목과 내용을 확인하세요.", response);
 		}

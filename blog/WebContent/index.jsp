@@ -8,5 +8,5 @@
 
 %>
 
-<c:redirect url="/board?cmd=home" /> <!-- url 찾아가는 방식이 JSP코드와 다르다. -->
+<c:redirect url="/board?cmd=home&page=0" /> <!-- url 찾아가는 방식이 JSP코드와 다르다. -->
 

@@ -12,6 +12,7 @@ import com.cos.blog.action.Action;
 import com.cos.blog.model.RoleType;
 import com.cos.blog.model.Users;
 import com.cos.blog.repository.UsersRepository;
+import com.cos.blog.util.SHA256;
 import com.cos.blog.util.Script;
 
 public class UsersUpdateProcAction implements Action{
@@ -51,7 +52,10 @@ public class UsersUpdateProcAction implements Action{
 		
 		// 1. parameter 받기 (X-www.form-urlencoded 라는 MIME 타입 key=value)
 		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		
+		String rawPassword = request.getParameter("password");
+		String password = SHA256.encodeSha256(rawPassword);
+		
 		String email = request.getParameter("email"); // e-mail 형식에 대한 유효성 검사도 시행해줘야함
 		String address = request.getParameter("address");
 		String userRole = RoleType.USER.toString(); // 마음대로 넣는 걸 방지하기 위해 enum으로 설정

@@ -9,7 +9,7 @@ function deleteById(boardId) { // 주소에 값이 노출되지만 delete이기 
 
 		if (result == 1) {
 			alert("삭제 성공");
-			location.href = "/blog/board?cmd=home";
+			location.href = "/blog/board?cmd=home&page=0";
 		} else {
 			alert("삭제 실패");
 		}
@@ -21,4 +21,10 @@ function deleteById(boardId) { // 주소에 값이 노출되지만 delete이기 
 	}).always(function(result) {
 
 	});
+}
+
+function back(page) {
+	
+	location.href = "/blog/board?cmd=home&page=" + page;
+	
 }

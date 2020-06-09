@@ -68,6 +68,27 @@ public class BoardRepository {
 		}
 		return -1; // 실패시
 	}
+	
+	// 리드카운트 수정
+	public int readCountUp(int id) { // object 받기(안에 내용 다 받아야 하니까)
+		final String SQL = "UPDATE board SET readCount = readCount+1 WHERE id = ? ";
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+			// 물음표 완성하기
+
+			pstmt.setInt(1, id);
+			
+			return pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "update : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		return -1; // 실패시
+	}
 
 	// 회원정보 삭제
 	public int deleteById(int id) { // object 받기(안에 내용 다 받아야 하니까)
@@ -98,6 +119,52 @@ public class BoardRepository {
 		try {
 			conn = DBConn.getConnection(); // DB에 연결
 			pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			
+			// while 돌려서 rs -> java오브젝트에 집어넣기
+			while (rs.next()) {
+				
+				Board board = Board.builder()
+						.id(rs.getInt(1))
+						.userId(rs.getInt(2))
+						.title(rs.getString(3))
+						.content(rs.getString(4))
+						.readCount(rs.getInt(5))
+						.createDate(rs.getTimestamp(6))
+						.build();
+				
+				boards.add(board);		
+				
+			}
+			
+			return boards;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "findAll : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		
+		return null; // 실패시
+		
+	}
+	
+	// 회원정보 3건찾기
+	public List<Board> findThree(int page) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT /*+ INDEX_DESC(BOARD SYS_C008628)*/id, userId, title, content, readCount, createDate ");
+		sb.append("FROM board ");
+		sb.append("OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY");
+		
+		final String SQL = sb.toString();
+		List<Board> boards = new ArrayList<>();
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+			
+			pstmt.setInt(1, page*3);
+			
 			rs = pstmt.executeQuery();
 			
 			// while 돌려서 rs -> java오브젝트에 집어넣기
