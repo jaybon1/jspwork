@@ -1,11 +1,17 @@
 package com.cos.blog.action.board;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -28,11 +34,58 @@ public class BoardDetailAction implements Action {
 			Script.back("잘못된 접근입니다.", response);
 			return;
 		}
+		
 
 		int id = Integer.parseInt(request.getParameter("id"));
 
 		BoardRepository boardRepository = BoardRepository.getInstance();
-		int result = boardRepository.readCountUp(id);
+		
+		int result = 1;
+		
+		Cookie[] cookies = request.getCookies();
+		int visitor = 0;
+		
+		
+		
+		for (Cookie cookie : cookies) {
+			System.out.println(cookie.getName());
+			if(cookie.getName().equals("visit")) {
+				visitor = 1;
+				
+				System.out.println("visit통과");
+				
+				if(cookie.getValue().contains(request.getParameter("id"))) {
+					
+					System.out.println("visitif통과");
+					
+				} else {
+					
+					cookie.setValue(cookie.getValue()+ "_" + request.getParameter("id"));
+					
+					response.addCookie(cookie);
+					
+					result = boardRepository.readCountUp(id);
+					
+				} 
+			}
+		}
+		
+		if(visitor == 0) {
+			Cookie cookie1 = new Cookie("visit", request.getParameter("id"));
+			response.addCookie(cookie1);
+			
+			result = boardRepository.readCountUp(id);
+		}
+		
+		
+//		Cookie cookie =
+		
+//		HttpSession session = request.getSession();
+//		if(session.getAttribute("sameUser") == null || !session.getAttribute("sameUser").equals(request.getParameter("id"))) {
+//			result = boardRepository.readCountUp(id);
+//			session.setAttribute("sameUser", request.getParameter("id"));
+//		}
+		
 		
 		if(result == 1) {
 			DetailResponseDto drd = boardRepository.findById(id);
@@ -55,9 +108,6 @@ public class BoardDetailAction implements Action {
 			Script.back("상세보기를 할 수 없습니다.", response);
 		}
 		
-
-		
-
 	}
 
 }

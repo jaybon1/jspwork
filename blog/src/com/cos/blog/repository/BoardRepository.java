@@ -150,6 +150,35 @@ public class BoardRepository {
 		
 	}
 	
+	// 게시글 숫자 검색
+	public int count() { // object 받기(안에 내용 다 받아야 하니까)
+		final String SQL = "SELECT count(id) FROM board";
+		List<Board> boards = new ArrayList<>();
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			
+			int count = -1;
+			
+			if (rs.next()) {
+				
+				count = rs.getInt(1);
+				
+			}
+			
+			return count;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "findAll : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		
+		return -1; // 실패시
+	}
+	
 	// 회원정보 3건찾기
 	public List<Board> findThree(int page) {
 		StringBuilder sb = new StringBuilder();

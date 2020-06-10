@@ -33,7 +33,11 @@ public class BoardHomeAction implements Action {
 
 		}
 		
+		int lastPage = (boardRepository.count() - 1) / 3;
+		System.out.println(lastPage);
+		
 		request.setAttribute("boards", boards);
+		request.setAttribute("lastPage", lastPage);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("home.jsp");
 		dis.forward(request, response);

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.sql.ResultSet"/>
-<fullyQualifiedTypeName name="com.cos.blog.db.DBConn"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.cos.blog.model.Reply"/>
 <fullyQualifiedTypeName name="com.cos.blog.action.user.UsersJoinProcAction"/>
@@ -20,11 +18,9 @@
 <fullyQualifiedTypeName name="com.love.blog.action.users.UsersJoinProcAction"/>
 <fullyQualifiedTypeName name="com.love.blog.action.users.UsersJoinAction"/>
 <fullyQualifiedTypeName name="com.cos.blog.action.user.UsersLogoutAction"/>
-<fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
 <fullyQualifiedTypeName name="com.cos.blog.action.user.UsersUsernameCheckAction"/>
 <fullyQualifiedTypeName name="com.cos.blog.action.board.BoardWriteAction"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.nhncorp.lucy.security.xss.XssPreventer"/>
 <fullyQualifiedTypeName name="com.nhncorp.lucy.security.xss.XssSaxFilter"/>
 <fullyQualifiedTypeName name="com.nhncorp.lucy.security.xss.LucyXssFilter"/>
@@ -43,7 +39,6 @@
 <fullyQualifiedTypeName name="org.jsoup.select.Elements"/>
 <fullyQualifiedTypeName name="org.jsoup.nodes.Element"/>
 <fullyQualifiedTypeName name="com.cos.blog.action.Action"/>
-<fullyQualifiedTypeName name="javax.websocket.Session"/>
 <fullyQualifiedTypeName name="com.cos.blog.model.Users"/>
 <fullyQualifiedTypeName name="com.cos.blog.util.HtmlParser"/>
 <fullyQualifiedTypeName name="org.jsoup.helper.HttpConnection"/>
@@ -56,8 +51,13 @@
 <fullyQualifiedTypeName name="java.lang.StringBuffer"/>
 <fullyQualifiedTypeName name="java.security.NoSuchAlgorithmException"/>
 <fullyQualifiedTypeName name="java.security.MessageDigest"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="com.cos.blog.util.SHA256"/>
 <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+<fullyQualifiedTypeName name="javax.websocket.Session"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.Vector"/>
+<fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
 </qualifiedTypeNameHistroy>
