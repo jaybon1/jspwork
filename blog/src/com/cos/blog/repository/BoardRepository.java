@@ -112,7 +112,7 @@ public class BoardRepository {
 		
 	}
 
-	// 회원정보 다 찾기
+	// 게시글 다 찾기
 	public List<Board> findAll() { // object 받기(안에 내용 다 받아야 하니까)
 		final String SQL = "SELECT id, userid, title, content, readcount, createdate FROM board ORDER BY id DESC";
 		List<Board> boards = new ArrayList<>();
@@ -147,7 +147,56 @@ public class BoardRepository {
 		}
 		
 		return null; // 실패시
+	}
+	
+	// 검색한 게시글 다 찾기
+	public List<Board> findAll(int page, String keyword) { // object 받기(안에 내용 다 받아야 하니까)
 		
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT /*+ INDEX_DESC(BOARD SYS_C008628)*/id, userId, title, content, readCount, createDate ");
+		sb.append("FROM board ");
+		sb.append("WHERE title like ? OR content like ?");
+		sb.append("OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY");
+		
+		System.out.println(sb.toString());
+		
+		final String SQL = sb.toString();
+		List<Board> boards = new ArrayList<>();
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setString(2, "%"+keyword+"%");
+			pstmt.setInt(3, page * 3);
+			
+			rs = pstmt.executeQuery();
+			
+			// while 돌려서 rs -> java오브젝트에 집어넣기
+			while (rs.next()) {
+				
+				Board board = Board.builder()
+						.id(rs.getInt(1))
+						.userId(rs.getInt(2))
+						.title(rs.getString(3))
+						.content(rs.getString(4))
+						.readCount(rs.getInt(5))
+						.createDate(rs.getTimestamp(6))
+						.build();
+				
+				boards.add(board);		
+				
+			}
+			
+			return boards;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "findAll(page, keyword) : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		
+		return null; // 실패시
 	}
 	
 	// 게시글 숫자 검색
@@ -171,7 +220,39 @@ public class BoardRepository {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(TAG + "findAll : " + e.getMessage());
+			System.out.println(TAG + "count : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		
+		return -1; // 실패시
+	}
+	
+	// 게시글 숫자 검색
+	public int count(String keyword) { // object 받기(안에 내용 다 받아야 하니까)
+		final String SQL = "SELECT count(id) FROM board WHERE title like ? OR content like ? ";
+		List<Board> boards = new ArrayList<>();
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setString(2, "%"+keyword+"%");
+			
+			rs = pstmt.executeQuery();
+			
+			int count = -1;
+			
+			if (rs.next()) {
+				
+				count = rs.getInt(1);
+				
+			}
+			
+			return count;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "count(keyword) : " + e.getMessage());
 		} finally {
 			DBConn.close(conn, pstmt, rs);
 		}

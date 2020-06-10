@@ -27,6 +27,8 @@ public class HtmlParser {
 					return text.substring(0, 10) + "...";
 				}
 
+			} else {
+				return "";
 			}
 			
 		} else if (content.length() > 10) {
@@ -51,18 +53,23 @@ public class HtmlParser {
 			
 //			if(!element.text().equals("")) {
 				
-				if(element.attr("href").contains("youtube.com/")) {
+				if(!element.attr("href").contains("youtube.com/channel") && element.attr("href").contains("youtube.com/")) {
+					
+					System.out.println(element.attr("href"));
 					
 					String[] parseContent = element.attr("href").split("v=");
+
 					
-					element.after("<br/><iframe width=\"689\" height=\"517\" src=\"https://www.youtube.com/embed/"+parseContent[1]+"\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+					element.after("<br/><iframe width=\"400\" height=\"250\" src=\"https://www.youtube.com/embed/"+parseContent[1]+"\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
 					
 					
 				} else if(element.attr("href").contains("youtu.be/")) {
 					
+					System.out.println(element.attr("href"));
+					
 					String[] parseContent = element.attr("href").split("be/");
 					
-					element.after("<br/><iframe width=\"689\" height=\"517\" src=\"https://www.youtube.com/embed/"+parseContent[1]+"\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+					element.after("<br/><iframe width=\"400\" height=\"250\" src=\"https://www.youtube.com/embed/"+parseContent[1]+"\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
 					
 				}
 				
