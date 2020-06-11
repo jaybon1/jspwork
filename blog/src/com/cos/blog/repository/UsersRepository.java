@@ -73,7 +73,7 @@ public class UsersRepository {
 				user.setUsername(rs.getString("username"));
 				user.setEmail(rs.getString("email"));
 				user.setAddress(rs.getString("address"));
-				user.setUserprofile(rs.getString("userProfile"));
+				user.setUserProfile(rs.getString("userProfile"));
 				user.setUserRole(rs.getString("userRole"));
 				user.setCreateDate(rs.getTimestamp("createDate"));
 			}
@@ -134,6 +134,27 @@ public class UsersRepository {
 		}
 		return -1; // 실패시
 	}
+	
+	// 회원정보 수정
+	public int update(int id, String userProfile) {
+		final String SQL = "UPDATE users SET userProfile = ? WHERE id = ? ";
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+			// 물음표 완성하기
+		
+			pstmt.setString(1, userProfile);
+			pstmt.setInt(2, id);
+			
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "update : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		return -1; // 실패시
+	}
 
 	// 회원정보 삭제
 	public int deleteById(int id) { // object 받기(안에 내용 다 받아야 하니까)
@@ -174,14 +195,33 @@ public class UsersRepository {
 
 	// 회원정보 한 건 찾기
 	public Users findById(int id) { // object 받기(안에 내용 다 받아야 하니까)
-		final String SQL = "";
+		final String SQL = "SELECT id, username, email, address, userProfile, userRole, createDate "
+				+ "FROM users WHERE id = ?";
 		Users user = new Users();
 		try {
 			conn = DBConn.getConnection(); // DB에 연결
 			pstmt = conn.prepareStatement(SQL);
+			
 			// 물음표 완성하기
+			pstmt.setInt(1, id);
+			
+			rs = pstmt.executeQuery();
+			
 
 			// if 돌려서 rs -> java오브젝트에 집어넣기
+			if(rs.next()) {
+				
+				user = new Users(); // 무조건 null이 아니라는 의미
+				user.setId(rs.getInt("id"));
+				user.setUsername(rs.getString("username"));
+				user.setEmail(rs.getString("email"));
+				user.setAddress(rs.getString("address"));
+				user.setUserProfile(rs.getString("userProfile"));
+				user.setUserRole(rs.getString("userRole"));
+				user.setCreateDate(rs.getTimestamp("createDate"));
+				
+			}
+			
 			return user;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -191,5 +231,4 @@ public class UsersRepository {
 		}
 		return null; // 실패시
 	}
-
 }

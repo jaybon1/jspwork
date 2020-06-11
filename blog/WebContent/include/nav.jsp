@@ -29,7 +29,8 @@
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+		<div class="justify-content-between collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
 
 				<c:choose>
@@ -47,9 +48,26 @@
 						<li class="nav-item"><a class="nav-link" href="/blog/user?cmd=logout">로그아웃</a></li>
 
 					</c:otherwise>
+					
 				</c:choose>
 
 			</ul>
+
+			<ul class="navbar-nav">
+
+				<c:if test="${not empty sessionScope.principal}">
+					<li class="nav-item">
+					
+						<a href="/blog/user?cmd=profileUpload"> 
+						
+							<img style="border-radius: 20px" onerror="this.src='/blog/image/userProfile.png'"
+								src="${sessionScope.principal.userProfile}" width="40px" height="40px" />
+						</a>
+					</li>
+				</c:if>
+
+			</ul>
+
 		</div>
 	</nav>
 	<br>

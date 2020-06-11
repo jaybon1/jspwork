@@ -12,9 +12,10 @@ import com.cos.blog.action.Action;
 public class UsersJoinAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		RequestDispatcher dis = request.getRequestDispatcher("user/join.jsp");
 		dis.forward(request, response);
-
+		
 	}
 
 }
