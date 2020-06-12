@@ -8,9 +8,5 @@ public class FBItest {
 		
 		BoardRepository boardRepository = BoardRepository.getInstance();
 		
-		DetailResponseDto drd = boardRepository.findById(1);
-		
-		System.out.println(drd.getUsername());
-		
 	}
 }

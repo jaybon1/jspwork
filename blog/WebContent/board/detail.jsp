@@ -6,11 +6,11 @@
 
 	<button type="button" class="btn btn-light" onclick="back(${param.page})">뒤로가기</button>
 
-	<c:if test="${sessionScope.principal.id == dto.board.userId}">
+	<c:if test="${sessionScope.principal.id == detailDto.boardDto.board.userId}">
 
-		<a href="/blog/board?cmd=update&id=${dto.board.id}" class="btn btn-warning">수정</a>
+		<a href="/blog/board?cmd=update&id=${detailDto.boardDto.board.id}" class="btn btn-warning">수정</a>
 		<!-- 하이퍼링크는 get방식만 사용 -->
-		<button type="button" class="btn btn-danger" onclick="deleteById(${dto.board.id})">삭제</button>
+		<button type="button" class="btn btn-danger" onclick="deleteById(${detailDto.boardDto.board.id})">삭제</button>
 
 	</c:if>
 
@@ -19,14 +19,14 @@
 
 
 	<h6>
-		작성자 : <i>${dto.username}</i> 조회수 : <i>${dto.board.readCount}</i>
+		작성자 : <i>${detailDto.boardDto.username}</i> 조회수 : <i>${detailDto.boardDto.board.readCount}</i>
 	</h6>
 
 	<br />
 
-	<h3>${dto.board.title}</h3>
+	<h3>${detailDto.boardDto.board.title}</h3>
 
-	<div class="container p-3 my-3 border">${dto.board.content}</div>
+	<div class="container p-3 my-3 border">${detailDto.boardDto.board.content}</div>
 
 	<hr />
 	<!-- 댓글 박스 -->
@@ -46,12 +46,16 @@
 						<!-- 댓글 리스트 시작-->
 						<ul class="media-list">
 
-							<c:forEach begin="1" end="3">
+							<c:forEach var="replyDto" items="${detailDto.replyDtos}">
 								<!-- 댓글 아이템 -->
-								<li class="media"><img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
+								<li class="media"><img onerror="this.src='/blog/image/userProfile.png'" src="${replyDto.userProfile}" alt="" class="img-circle">
 									<div class="media-body">
-										<strong class="text-primary">@MartinoMont</strong>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet.</p>
+										<strong class="text-primary">${replyDto.username}</strong>
+										<p>
+											${replyDto.reply.content}
+											<br/>
+											<br/>
+										</p>
 									</div></li>
 							</c:forEach>
 						</ul>

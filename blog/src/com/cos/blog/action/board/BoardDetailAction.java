@@ -19,9 +19,12 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.cos.blog.action.Action;
+import com.cos.blog.dto.BoardResponseDto;
 import com.cos.blog.dto.DetailResponseDto;
+import com.cos.blog.dto.ReplyResponseDto;
 import com.cos.blog.model.Board;
 import com.cos.blog.repository.BoardRepository;
+import com.cos.blog.repository.ReplyRepository;
 import com.cos.blog.util.HtmlParser;
 import com.cos.blog.util.Script;
 
@@ -36,11 +39,13 @@ public class BoardDetailAction implements Action {
 		}
 		
 
-		int id = Integer.parseInt(request.getParameter("id"));
+		int boardId = Integer.parseInt(request.getParameter("id"));
 
 		BoardRepository boardRepository = BoardRepository.getInstance();
 		
-		int result = 1;
+		ReplyRepository replyRepository = ReplyRepository.getInstance();
+		
+		int result = 0;
 		
 		Cookie[] cookies = request.getCookies();
 		int visitor = 0;
@@ -50,13 +55,13 @@ public class BoardDetailAction implements Action {
 		for (Cookie cookie : cookies) {
 			System.out.println(cookie.getName());
 			if(cookie.getName().equals("visit")) {
+				
 				visitor = 1;
 				
-				System.out.println("visit통과");
 				
 				if(cookie.getValue().contains(request.getParameter("id"))) {
 					
-					System.out.println("visitif통과");
+					result = 1;
 					
 				} else {
 					
@@ -64,7 +69,7 @@ public class BoardDetailAction implements Action {
 					
 					response.addCookie(cookie);
 					
-					result = boardRepository.readCountUp(id);
+					result = boardRepository.readCountUp(boardId);
 					
 				} 
 			}
@@ -74,8 +79,15 @@ public class BoardDetailAction implements Action {
 			Cookie cookie1 = new Cookie("visit", request.getParameter("id"));
 			response.addCookie(cookie1);
 			
-			result = boardRepository.readCountUp(id);
+			result = boardRepository.readCountUp(boardId);
 		}
+		
+		
+		
+//		if(result != 1) {
+//			Script.back("서버오류", response);
+//			return;
+//		}
 		
 		
 //		Cookie cookie =
@@ -88,23 +100,33 @@ public class BoardDetailAction implements Action {
 		
 		
 		if(result == 1) {
-			DetailResponseDto drd = boardRepository.findById(id);
-			if (drd != null) {
+			
+			BoardResponseDto boardDto = boardRepository.findById(boardId);
+			List<ReplyResponseDto> replyDtos = replyRepository.findAll(boardId);
+			
+			
+			DetailResponseDto detailDto = DetailResponseDto.builder()
+					.boardDto(boardDto)
+					.replyDtos(replyDtos)
+					.build();
+			
+			if (detailDto != null) {
 				
-				String content = drd.getBoard().getContent(); // DTO에서 컨텐츠 가져오기
+				String content = detailDto.getBoardDto().getBoard().getContent(); // DTO에서 컨텐츠 가져오기
 				
 				String doc = HtmlParser.youtubeParser(content); // 유튜브 링크가 있다면 아래에 영상 프레임 넣기
 				
-				drd.getBoard().setContent(doc); // 바뀐 내용을 콘텐츠에 바꿔넣기
+				detailDto.getBoardDto().getBoard().setContent(doc); // 바뀐 내용을 콘텐츠에 바꿔넣기
 				
-				request.setAttribute("dto", drd);
+				request.setAttribute("detailDto", detailDto);
 
 				RequestDispatcher dis = request.getRequestDispatcher("board/detail.jsp");
 				dis.forward(request, response);
+				
 			} else {
 				Script.back("잘못된 접근입니다.", response);
 			}
-		}else {
+		} else {
 			Script.back("상세보기를 할 수 없습니다.", response);
 		}
 		
