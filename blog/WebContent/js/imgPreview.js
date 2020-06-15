@@ -20,10 +20,11 @@ $("#img__preview").on("change", (e) => {
 	// readAsDataURL(f)보다 위에 설정
 
 	reader.onload = function (e) { // readAsDataURL(f)보다 아래에 있으면 타이밍이 안맞을 수 있음.
-		$("#img__wrap").attr("src", e.target.result);			
+		$("#img__wrap").attr("src", e.target.result);
 	}
-	
+
 	reader.readAsDataURL(f); // 비동기 실행
+	
 
 	// reader.readAsDataURL(f); 가 실행이 끝나면 e.target(이벤트객체)에 result라는 객체를 하나
 	// 생성하고 안에 이미지를 넣어준다.

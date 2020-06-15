@@ -3,6 +3,7 @@ package com.cos.blog.model;
 import java.sql.Timestamp;
 
 import com.cos.blog.model.Board.BoardBuilder;
+import com.nhncorp.lucy.security.xss.XssPreventer;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,4 +19,11 @@ public class Reply {
 	private int boardId;
 	private String content;
 	private Timestamp createDate;
+	
+	public String getContent() {
+		
+		return XssPreventer.escape(content);
+		
+	}
 }
+

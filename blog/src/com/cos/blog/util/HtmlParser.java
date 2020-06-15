@@ -5,6 +5,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.nhncorp.lucy.security.xss.XssPreventer;
+
 public class HtmlParser {
 	public static String getContentPreview(String content) {
 
@@ -21,6 +23,7 @@ public class HtmlParser {
 			String text = pTags.get(0).text();
 
 			if (text.length() > 0) {
+				text = XssPreventer.escape(text);
 				if (text.length() < 11) {
 					return text;
 				} else {
@@ -37,7 +40,7 @@ public class HtmlParser {
 			
 		}
 		
-		return content;
+		return XssPreventer.escape(content);
 		
 	}
 	

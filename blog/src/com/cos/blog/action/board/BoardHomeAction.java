@@ -33,6 +33,7 @@ public class BoardHomeAction implements Action {
 
 		}
 		
+		
 		int lastPage = (boardRepository.count() - 1) / 3;
 		System.out.println(lastPage);
 		
