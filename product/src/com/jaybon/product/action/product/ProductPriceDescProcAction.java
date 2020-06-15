@@ -28,7 +28,7 @@ public class ProductPriceDescProcAction implements Action{
 		String productsJson = gson.toJson(products);
 		
 		response.setCharacterEncoding("utf-8");
-		response.setContentType("application/json; charser=utf-8");
+		response.setContentType("application/json; charset=utf-8");
 		PrintWriter pw = response.getWriter();
 		
 		pw.println(productsJson);
