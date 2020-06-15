@@ -1,4 +1,4 @@
-GitRepositoriesView.GitDirectories=C\:\\src\\jspwork\\.git;
-GitRepositoriesView.GitDirectories.relative=.git;
+GitRepositoriesView.GitDirectories=C\:\\src\\testblog\\blog\\.git;C\:\\src\\jspwork\\.git;
+GitRepositoriesView.GitDirectories.relative=C\:\\src\\testblog\\blog\\.git;.git;
 core_autoIgnoreDerivedResources=false
 eclipse.preferences.version=1

@@ -55,7 +55,7 @@
 									</div>
 									<div class="m-3">
 										<c:if test="${replyDto.reply.userId eq sessionScope.principal.id}">
-											<i onclick="replyDelete(${replyDto.reply.id})" class="fa fa-cloud" style="cursor: pointer; font-size:30px;color:red;"></i>
+											<i onclick="replyDelete(${replyDto.reply.id})" class="fa fa-remove" style="cursor: pointer; font-size:30px;color:red;"></i>
 										</c:if>
 									</div>
 								</li>
@@ -146,7 +146,7 @@
 						"		</p>\r\n" + 
 						"	</div>"+
 						"	<div class=\"m-3\">\r\n" +
-						"		<i onclick=\"replyDelete("+replyDto.reply.id+")\" class=\"fa fa-cloud\" style=\"cursor:pointer;font-size:30px;color:red;\"></i>\r\n" + 
+						"		<i onclick=\"replyDelete("+replyDto.reply.id+")\" class=\"fa fa-remove\" style=\"cursor:pointer;font-size:30px;color:red;\"></i>\r\n" + 
 						"	</div>"+
 						"</li>";
 						  
