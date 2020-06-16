@@ -9,16 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jaybon.baseball.action.Action;
+import com.jaybon.baseball.action.team.TeamHomeAction;
 
 
 
 // http://localhost:8000/blog/user
-@WebServlet("/test")
-public class BaseballController extends HttpServlet {
-	private final static String TAG = "ProductController : ";
+@WebServlet("/team")
+public class TeamController extends HttpServlet {
+	private final static String TAG = "BaseballController : ";
 	private static final long serialVersionUID = 1L;
 
-	public BaseballController() {
+	public TeamController() {
 		super();
 	}
 
@@ -43,7 +44,7 @@ public class BaseballController extends HttpServlet {
 
 	public Action router(String cmd) {
 		if (cmd.equals("home")) {
-			return null;
+			return new TeamHomeAction();
 		} 
 		return null;
 	}

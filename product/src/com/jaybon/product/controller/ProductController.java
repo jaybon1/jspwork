@@ -15,6 +15,7 @@ import com.jaybon.product.action.product.ProductGoFirstProcAction;
 import com.jaybon.product.action.product.ProductPriceAscProcAction;
 import com.jaybon.product.action.product.ProductPriceDescProcAction;
 import com.jaybon.product.action.product.ProductTestAction;
+import com.jaybon.product.action.product.ProductInsertItemProcAction;
 
 
 // http://localhost:8000/blog/user
@@ -59,6 +60,8 @@ public class ProductController extends HttpServlet {
 			return new ProductCountDescProcAction();
 		} else if (cmd.equals("deleteProc")) {
 			return new ProductDeleteProcAction();
+		} else if (cmd.equals("insertItem")) {
+			return new ProductInsertItemProcAction();
 		}
 		return null;
 	}

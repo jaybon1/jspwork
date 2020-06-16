@@ -25,6 +25,26 @@ public class ProductRepository {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
+	
+	public int insertItem(Product product) {
+		final String SQL = "INSERT INTO product(id, name, type, price, count) "
+				+ "VALUES(PRODUCT_SEQ.nextval,?,?,?,?)";
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, product.getName());
+			pstmt.setString(2, product.getType().toString());
+			pstmt.setInt(3, product.getPrice());
+			pstmt.setInt(4, product.getCount());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "insertItem : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		return -1; // 실패시
+	}
 
 	
 	public int deleteById(int id) {

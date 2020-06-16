@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Bootstrap Example</title>
+<title>Product</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -18,7 +18,24 @@
 
 	<div class="container">
 		<h2>Product</h2>
-		<p>The .table-striped class adds zebra-stripes to a table:</p>
+		
+		<form action="/product/test?cmd=insertItem" method="post">
+		  <div class="input-group mb-3">
+		    <div class="input-group-prepend">
+		      <span class="input-group-text">아이템 추가</span>
+		    </div>
+		    <input name="productName" type="text" class="form-control" placeholder="이름" required="required">
+		    <select name='productType' size='1' required="required">
+			    <option value='' selected>종류선택</option>
+			    <option value='옷'>옷</option>
+			    <option value='과일'>과일</option>
+			    <option value='문구'>문구</option>
+			</select>
+		    <input name="productPrice" type="text" class="form-control" placeholder="가격" required="required">
+			<input name="productCount" type="text" class="form-control" placeholder="판매수" required="required">
+		    <button type="submit">추가하기</button>
+		  </div>
+		</form>
 
 		<div class="btn-group">
 			<button onclick="goFirst()" type="button" class="btn btn-primary">처음으로</button>
