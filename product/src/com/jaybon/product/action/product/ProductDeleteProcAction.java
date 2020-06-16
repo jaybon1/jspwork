@@ -24,21 +24,11 @@ public class ProductDeleteProcAction implements Action{
 		
 		int result = productRepository.deleteById(productId);
 		
-		
-		if(result == 1) {
-			
-			List<Product> products = productRepository.findAll();
-			
-			Gson gson = new Gson();
-			
-			String productsJson = gson.toJson(products);
-			
-			response.setCharacterEncoding("utf-8");
-			response.setContentType("application/json; charset=utf-8");
-			PrintWriter pw = response.getWriter();
-			pw.println(productsJson);
-			
-		}
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		pw.println(result+"");
+
 		
 	}
 

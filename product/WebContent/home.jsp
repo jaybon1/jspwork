@@ -45,7 +45,7 @@
 						<td>${product.type}</td>
 						<td>${product.price}</td>
 						<td>${product.count}</td>
-						<td><i class="large material-icons" onclick="deleteItem(${product.id})" style="cursor:pointer;">delete_forever</i></td>
+						<td><i class="large material-icons" onclick="deleteItem(${product.id}, 'goFirst')" style="cursor:pointer;">delete_forever</i></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -55,7 +55,7 @@
 	
 <script>
 
-	function append(result) {
+	function append(result, listType) {
 		for (var product of result){
 			
 			var string =
@@ -83,12 +83,16 @@
 			dataType : "json"
 			
 		}).done(function (result) {
+			if(result == "1"){
+				$("#product-"+productId).remove();
+				alert("삭제에 성공하였습니다.");				
+			} else{
+				alert("삭제에 실패하였습니다.");
+			}
 			
-			$("#my__tbody").empty();
-			alert("삭제에 성공하였습니다.");
-			append(result);
+// 			$("#my__tbody").empty();
+// 			append(result);
 
-			
 		}).fail(function (result) {
 			alert("삭제에 실패하였습니다.");
 		});
@@ -145,7 +149,7 @@
 		}).done(function (result) {
 			
 			$("#my__tbody").empty();
-			append(result);
+			append(result, "priceDesc");
 			
 		}).fail(function (result) {
 			

@@ -8,5 +8,16 @@
 </head>
 <body>
 	index 페이지
+	
+<script type="text/javascript">
+	function name() {
+		
+	}
+	
+	while (condition) {
+		
+	}
+	
+</script>
 </body>
 </html>

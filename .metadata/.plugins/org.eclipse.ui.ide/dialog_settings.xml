@@ -65,6 +65,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\src\testblog\blog"/>
 			<item value="C:\src\jspwork\blog"/>
 			<item value="C:\src\jspwork\test1"/>
 			<item value="C:\src\jspwork\aaa"/>
@@ -77,7 +78,7 @@
 		<item key="DIALOG_Y_ORIGIN" value="264"/>
 		<item key="DIALOG_WIDTH" value="500"/>
 		<item key="DIALOG_HEIGHT" value="389"/>
-		<item key="TOGGLE_SELECTED" value="false"/>
+		<item key="TOGGLE_SELECTED" value="true"/>
 	</section>
 	<section name="ExternalProjectImportWizard">
 		<item key="WizardProjectsImportPage.STORE_NESTED_PROJECTS" value="false"/>
