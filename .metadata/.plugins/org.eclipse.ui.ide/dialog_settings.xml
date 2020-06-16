@@ -42,10 +42,10 @@
 		<item value="org.eclipse.wb.xwt.feature:1.9.3.202001230951"/>
 		<item value="org.eclipse.wst.common.fproj:3.7.2.v201903222010"/>
 		<item value="org.eclipse.wst.jsdt.chromium.debug.feature:0.6.100.v201908270117"/>
-		<item value="org.eclipse.wst.jsdt.feature:2.1.4.v201912012351"/>
+		<item value="org.eclipse.wst.jsdt.feature:2.1.5.v202002141644"/>
 		<item value="org.eclipse.wst.json_ui.feature:1.1.8.v201909302219"/>
-		<item value="org.eclipse.wst.web_ui.feature:3.16.0.v201911262315"/>
-		<item value="org.eclipse.wst.xml_ui.feature:3.16.0.v201911262138"/>
+		<item value="org.eclipse.wst.web_ui.feature:3.17.0.v202002172151"/>
+		<item value="org.eclipse.wst.xml_ui.feature:3.17.0.v202001091420"/>
 		<item value="org.jboss.tools.m2e.wro4j.feature:1.1.0.201406251020"/>
 		<item value="org.jboss.tools.maven.apt.feature:1.5.2.201812241535"/>
 		<item value="org.sonatype.m2e.buildhelper.feature:0.15.0.201207090124"/>

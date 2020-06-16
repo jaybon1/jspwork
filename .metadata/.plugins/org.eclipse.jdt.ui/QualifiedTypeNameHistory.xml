@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.nhncorp.lucy.security.xss.LucyXssFilter"/>
-<fullyQualifiedTypeName name="com.nhncorp.lucy.security.xss.XssFilter"/>
-<fullyQualifiedTypeName name="com.cos.blog.model.Board"/>
-<fullyQualifiedTypeName name="com.cos.blog.repository.BoardRepository"/>
-<fullyQualifiedTypeName name="com.cos.blog.action.board.BoardUpdateProcAction"/>
-<fullyQualifiedTypeName name="org.jsoup.select.Elements"/>
-<fullyQualifiedTypeName name="org.jsoup.nodes.Element"/>
-<fullyQualifiedTypeName name="com.cos.blog.util.HtmlParser"/>
 <fullyQualifiedTypeName name="org.jsoup.helper.HttpConnection"/>
 <fullyQualifiedTypeName name="java.net.HttpURLConnection"/>
 <fullyQualifiedTypeName name="java.net.URL"/>
@@ -43,21 +35,29 @@
 <fullyQualifiedTypeName name="com.cos.blog.dto.ReplyResponseDto"/>
 <fullyQualifiedTypeName name="com.cos.blog.repository.ReplyRepository"/>
 <fullyQualifiedTypeName name="com.cos.blog.util.Script"/>
+<fullyQualifiedTypeName name="com.jaybon.product.model.Type"/>
+<fullyQualifiedTypeName name="com.jaybon.product.db.DBConn"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.io.PrintWriter"/>
 <fullyQualifiedTypeName name="lombok.Data"/>
 <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
 <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
-<fullyQualifiedTypeName name="com.jaybon.product.model.Type"/>
-<fullyQualifiedTypeName name="com.jaybon.product.db.DBConn"/>
 <fullyQualifiedTypeName name="lombok.Builder"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="com.jaybon.product.model.ProductType"/>
-<fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
-<fullyQualifiedTypeName name="com.jaybon.product.action.Action"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
-<fullyQualifiedTypeName name="com.jaybon.product.repository.ProductRepository"/>
+<fullyQualifiedTypeName name="com.jaybon.baseball.model.TeamList"/>
+<fullyQualifiedTypeName name="sun.java2d.pipe.hw.AccelDeviceEventListener"/>
+<fullyQualifiedTypeName name="com.jaybon.baseball.repository.TeamRepository"/>
+<fullyQualifiedTypeName name="com.jaybon.baseball.model.Team"/>
+<fullyQualifiedTypeName name="com.jaybon.baseball.repository.PlayerRepository"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="com.jaybon.product.model.Product"/>
 <fullyQualifiedTypeName name="com.google.gson.Gson"/>
-<fullyQualifiedTypeName name="java.io.PrintWriter"/>
+<fullyQualifiedTypeName name="com.jaybon.baseball.action.Action"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="com.jaybon.baseball.model.Player"/>
+<fullyQualifiedTypeName name="com.jaybon.product.action.Action"/>
+<fullyQualifiedTypeName name="jdk.nashorn.internal.ir.RuntimeNode.Request"/>
+<fullyQualifiedTypeName name="com.jaybon.product.model.ProductType"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="com.jaybon.product.model.Product"/>
+<fullyQualifiedTypeName name="com.jaybon.product.repository.ProductRepository"/>
+<fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
 </qualifiedTypeNameHistroy>
