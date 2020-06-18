@@ -25,8 +25,8 @@ public class UsersRepository {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 
-	public int findByUsername(String username) {
-		final String SQL = "SELECT count(*) " + "FROM users WHERE username=?";
+	public Users findByUsername(String username) {
+		final String SQL = "SELECT * FROM users WHERE username=?";
 		Users user = null;
 		try {
 			conn = DBConn.getConnection(); // DB에 연결
@@ -37,11 +37,21 @@ public class UsersRepository {
 
 			// if 돌려서 rs -> java오브젝트에 집어넣기
 			rs = pstmt.executeQuery();
-
+			
 			if (rs.next()) {
-				return rs.getInt(1);
+				user = Users.builder()
+						.id(rs.getInt("id"))
+						.username(rs.getString("username"))
+						.email(rs.getString("email"))
+						.address(rs.getString("address"))
+						.userProfile(rs.getString("userProfile"))
+						.userRole(rs.getString("userRole"))
+						.createDate(rs.getTimestamp("createDate"))
+						.build();
 			}
-
+		
+			return user;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(TAG + "findByUsername : " + e.getMessage());
@@ -49,7 +59,7 @@ public class UsersRepository {
 			DBConn.close(conn, pstmt, rs);
 		}
 
-		return -1; // 실패시
+		return null; // 실패시
 	}
 	
 

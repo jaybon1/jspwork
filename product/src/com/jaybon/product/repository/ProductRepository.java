@@ -77,6 +77,7 @@ public class ProductRepository {
 			conn = DBConn.getConnection(); // DB에 연결
 			pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
+			
 			if(rs.next()) {
 				products = new ArrayList<>();
 				
@@ -104,6 +105,7 @@ public class ProductRepository {
 					
 				}
 			}
+			
 			return products;
 		} catch (SQLException e) {
 			e.printStackTrace();

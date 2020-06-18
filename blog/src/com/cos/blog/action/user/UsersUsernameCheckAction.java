@@ -27,7 +27,14 @@ public class UsersUsernameCheckAction implements Action {
 		}
 		
 		UsersRepository userRepository = UsersRepository.getInstance();
-		int result = userRepository.findByUsername(username);
+		Users user = userRepository.findByUsername(username);
+		
+		int result = -1;
+		if(user != null && user.getId() == 0) {
+			result = 0;
+		}else if(user.getId() != 0) {
+			result = 1;
+		}
 		
 		Script.outText(result + "", response);
 		

@@ -47,6 +47,7 @@
 	</c:choose>
 
 	<br />
+	<div></div>
 
 	<!-- disabled -->
 	<ul class="pagination justify-content-center">

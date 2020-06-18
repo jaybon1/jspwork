@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.jsoup.helper.HttpConnection"/>
 <fullyQualifiedTypeName name="java.net.HttpURLConnection"/>
 <fullyQualifiedTypeName name="java.net.URL"/>
 <fullyQualifiedTypeName name="org.jsoup.nodes.Document"/>
@@ -15,7 +14,6 @@
 <fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="com.cos.blog.test.Test3"/>
 <fullyQualifiedTypeName name="java.util.UUID"/>
-<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
 <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
 <fullyQualifiedTypeName name="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"/>
 <fullyQualifiedTypeName name="com.cos.blog.repository.UsersRepository"/>
@@ -31,7 +29,6 @@
 <fullyQualifiedTypeName name="com.cos.blog.model.Reply"/>
 <fullyQualifiedTypeName name="com.cos.blog.action.reply.ReplyWriteProcAction"/>
 <fullyQualifiedTypeName name="com.nhncorp.lucy.security.xss.XssPreventer"/>
-<fullyQualifiedTypeName name="com.cos.blog.action.Action"/>
 <fullyQualifiedTypeName name="com.cos.blog.dto.ReplyResponseDto"/>
 <fullyQualifiedTypeName name="com.cos.blog.repository.ReplyRepository"/>
 <fullyQualifiedTypeName name="com.cos.blog.util.Script"/>
@@ -44,14 +41,12 @@
 <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
 <fullyQualifiedTypeName name="lombok.Builder"/>
 <fullyQualifiedTypeName name="com.jaybon.baseball.model.TeamList"/>
-<fullyQualifiedTypeName name="sun.java2d.pipe.hw.AccelDeviceEventListener"/>
 <fullyQualifiedTypeName name="com.jaybon.baseball.repository.TeamRepository"/>
 <fullyQualifiedTypeName name="com.jaybon.baseball.model.Team"/>
 <fullyQualifiedTypeName name="com.jaybon.baseball.repository.PlayerRepository"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.google.gson.Gson"/>
 <fullyQualifiedTypeName name="com.jaybon.baseball.action.Action"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="com.jaybon.baseball.model.Player"/>
 <fullyQualifiedTypeName name="com.jaybon.product.action.Action"/>
 <fullyQualifiedTypeName name="jdk.nashorn.internal.ir.RuntimeNode.Request"/>
@@ -60,4 +55,9 @@
 <fullyQualifiedTypeName name="com.jaybon.product.model.Product"/>
 <fullyQualifiedTypeName name="com.jaybon.product.repository.ProductRepository"/>
 <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+<fullyQualifiedTypeName name="sun.java2d.pipe.hw.AccelDeviceEventListener"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="com.cos.blog.action.Action"/>
+<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+<fullyQualifiedTypeName name="java.net.URLEncoder"/>
 </qualifiedTypeNameHistroy>
