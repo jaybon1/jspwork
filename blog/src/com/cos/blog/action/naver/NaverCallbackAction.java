@@ -1,4 +1,4 @@
-package com.cos.blog.action.kakao;
+package com.cos.blog.action.naver;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,86 +14,90 @@ import javax.servlet.http.HttpSession;
 import com.cos.blog.action.Action;
 import com.cos.blog.dto.KakaoProfile;
 import com.cos.blog.dto.KakaoToken;
+import com.cos.blog.dto.NaverProfile;
+import com.cos.blog.dto.NaverToken;
 import com.cos.blog.model.RoleType;
 import com.cos.blog.model.Users;
 import com.cos.blog.repository.UsersRepository;
 import com.cos.blog.util.KaKaoLogin;
+import com.cos.blog.util.NaverLogin;
 import com.cos.blog.util.Script;
 
 
 
-public class KakaoCallbackAction implements Action{
+public class NaverCallbackAction implements Action{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String code = request.getParameter("code");
+		String state = request.getParameter("state");
 		
-		String codeError = request.getParameter("error");
 		
-		if(codeError != null) {
+		if(code == null || code.equals("")) {
 			Script.href("에러가 발생하였습니다. 홈으로 돌아갑니다.", "index.jsp", response);
 			return;
 		}
 		
-		String code = request.getParameter("code");
-		System.out.println("카카오 인증 완료됨");
+		System.out.println("네이버 인증 완료됨");
 		System.out.println(code);
-		
-		
+		System.out.println(state);
+
+	
 		// 토큰 요청하기
-		KakaoToken kakaoToken = null;
+		NaverToken naverToken = null;
 		try {
-			kakaoToken = KaKaoLogin.getToken(code);
+			naverToken = NaverLogin.getToken(code);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println(kakaoToken);
 		
 		// 프로필 요청하기
-		KakaoProfile kakaoProfile = null;
+		NaverProfile naverProfile = null;
 		try {
-			kakaoProfile = KaKaoLogin.getProfile(kakaoToken);
+			naverProfile = NaverLogin.getProfile(naverToken.getAccess_token());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		System.out.println(kakaoProfile);
+		System.out.println(naverProfile);
+		
 		
 		// 회원가입 확인
 		UsersRepository usersRepository = 
 				UsersRepository.getInstance();
 		
-		Users principal = usersRepository.findByUsername(kakaoProfile.getId()+"_kakao");
+		Users principal = usersRepository.findByUsername(naverProfile.getResponse().getId()+"_naver");
 		
 		HttpSession session = request.getSession();
 		
 		if(principal != null) { // 기존회원이면 그냥 세션 넣고 로그인 진행
 			
 			session.setAttribute("principal", principal);
-			Script.href("카카오 로그인 완료", "/blog/index.jsp", response);
+			Script.href("네이버 로그인 완료", "/blog/index.jsp", response);
 			
 		} else { // 기존회원이 아니면 회원가입 후 로그인 진행
 			
 			// email 값이 없으면 추가 회원정보 받으로 이동
-			if(kakaoProfile.getKakao_account().getEmail() == null ||
-					kakaoProfile.getKakao_account().getEmail().equals("")) {
-				request.setAttribute("kakaoProfile", kakaoProfile);
+			if(naverProfile.getResponse().getEmail() == null ||
+					naverProfile.getResponse().getEmail().equals("")) {
+				request.setAttribute("naverProfile", naverProfile);
 				RequestDispatcher dis = 
-						request.getRequestDispatcher("/user/kakaoOauthJoin.jsp");
+						request.getRequestDispatcher("/user/naverOauthJoin.jsp");
 				dis.forward(request, response);
 				
 			}else { // email 값이 있으면 바로 회원가입 및 로그인 진행
-				String username = kakaoProfile.getId() + "_kakao";
+				String username = naverProfile.getResponse().getId() + "_naver";
 				Users user = Users.builder()
 						.username(username)
 						.password(UUID.randomUUID().toString())
-						.email(kakaoProfile.getKakao_account().getEmail())
+						.email(naverProfile.getResponse().getEmail())
 						.userRole(RoleType.USER.toString())
 						.build();
 				usersRepository.save(user);
 				session.setAttribute("principal", user);
 
-				Script.href("카카오 회원가입 및 로그인 완료", "/blog/index.jsp", response);
+				Script.href("네이버 회원가입 및 로그인 완료", "/blog/index.jsp", response);
 			}
 		}
 	}

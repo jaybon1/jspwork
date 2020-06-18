@@ -2,6 +2,8 @@
 
 <%@include file="../include/nav.jsp"%>
 
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+
 <%
 	// 	String remember = (String) request.getAttribute("remember");
 	// 	if(remember == null){
@@ -42,29 +44,11 @@
 		<a href="https://kauth.kakao.com/oauth/authorize?client_id=21a6b93175206a668eaa98bb2774a80a&redirect_uri=http://localhost:8000/blog/oauth/kakao?cmd=callback&response_type=code">
 			<img alt="" height="39px" src="/blog/image/kakao_login_button.png">
 		</a>
+		<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=qqoq10crroWmE1Yux6ZX&redirect_uri=http://localhost:8000/blog/oauth/naver?cmd=callback&state=1234567890">
+			<img alt="" height="39px" src="/blog/image/naverLoginButton.png">
+		</a>
 	</form>
 
 </div>
 
 <%@include file="../include/footer.jsp"%>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
