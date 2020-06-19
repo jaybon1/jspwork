@@ -63,10 +63,6 @@ public class UsersProfileUploadProcAction implements Action {
 		}
 		
 		
-		
-		
-		
-		
 //		BufferedReader br = request.getReader();
 //		StringBuilder sb = new StringBuilder();
 //		
