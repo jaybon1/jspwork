@@ -2,6 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@include file="include/nav.jsp"%>
 <%
-	response.sendRedirect("/practiceProgress/progress?cmd=home");
+	response.sendRedirect("/practiceProgress/classtable?cmd=home");
 
 %>

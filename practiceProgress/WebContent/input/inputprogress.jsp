@@ -6,25 +6,38 @@
 
 <div class="container">
 	<h2>훈련과정등록</h2>
-	<p>The .table-striped class adds zebra-stripes to a table:</p>
 	<br />
-	<form>
+	<form action="/practiceProgress/classtable?cmd=inputProc" method="post">
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
 				<span class="input-group-text">강의실</span>
 			</div>
-			<input type="text" class="form-control" style="width: 5%" placeholder="숫자로 입력" required="required">
+			<select name="room" required="required">
+				<option value="">선택</option>
+				<option value="402">402</option>
+				<option value="403">403</option>
+				<option value="404">404</option>
+				<option value="405">405</option>
+				<option value="501">501</option>
+				<option value="502">502</option>
+				<option value="503">503</option>
+				<option value="504">504</option>
+				<option value="505">505</option>
+				<option value="506">506</option>
+				<option value="507">507</option>
+				<option value="508">508</option>
+			</select>
 			<div class="input-group-prepend">
 				<span class="input-group-text">훈련과정명</span>
 			</div>
-			<input type="text" class="form-control" style="width: 60%" placeholder="훈련명을 입력해주세요" required="required">
+			<input name="className" type="text" class="form-control" style="width: 60%" placeholder="훈련명을 입력해주세요" required="required">
 
 		</div>
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
 				<span class="input-group-text">훈련분야</span>
 			</div>
-			<select name="prog_code" required="required">
+			<select name="classPart" required="required">
 				<option value="">선택</option>
 				<option value="sw">정보기술개발</option>
 				<option value="de">디자인</option>
@@ -33,37 +46,43 @@
 			<div class="input-group-prepend">
 				<span class="input-group-text">개강일</span>
 			</div>
-			<input type="date" required="required">
+			<input name="classOpen" type="date" required="required">
+			
 			<div class="input-group-prepend">
 				<span class="input-group-text">종강일</span>
 			</div>
-			<input type="date" required="required">
+			<input name="classClose" type="date" required="required">
+			
 			<div class="input-group-prepend">
 				<span class="input-group-text">담임교사</span>
 			</div>
-			<input type="text" class="form-control" placeholder="이름을 입력하세요" required="required">
+			<input name="homeroomProf" type="text" class="form-control" placeholder="이름을 입력하세요" required="required">
+			
 		</div>
 		<div>
 			<input class="float-right" type="submit" value="등록하기">
 		</div>
 	</form>
-	<br /> <br /> <br /> <br />
+	<br /> <br />
 	<h3>현시간 훈련진행상황</h3>
+	<br />
+	<p>호실을 누르면 상세보기 화면을 보실 수 있습니다:</p>
+	<br />
 	<table class="table .table-bordered text-center">
 		<thead>
 			<tr>
-				<th>402호</th>
-				<th>403호</th>
-				<th>404호</th>
-				<th>405호</th>
-				<th>501호</th>
-				<th>502호</th>
-				<th>503호</th>
-				<th>504호</th>
-				<th>505호</th>
-				<th>506호</th>
-				<th>507호</th>
-				<th>508호</th>
+				<th style="cursor: pointer;" onclick="detail(${pids.get(0).room})">402호</th>
+				<th style="cursor: pointer;" onclick="detail(${pids.get(1).room})">403호</th>
+				<th style="cursor: pointer;" onclick="detail(${pids.get(2).room})">404호</th>
+				<th style="cursor: pointer;" onclick="detail(${pids.get(3).room})">405호</th>
+				<th style="cursor: pointer;" onclick="detail(${pids.get(4).room})">501호</th>
+				<th style="cursor: pointer;" onclick="detail(${pids.get(5).room})">502호</th>
+				<th style="cursor: pointer;" onclick="detail(${pids.get(6).room})">503호</th>
+				<th style="cursor: pointer;" onclick="detail(${pids.get(7).room})">504호</th>
+				<th style="cursor: pointer;" onclick="detail(${pids.get(8).room})">505호</th>
+				<th style="cursor: pointer;" onclick="detail(${pids.get(9).room})">506호</th>
+				<th style="cursor: pointer;" onclick="detail(${pids.get(10).room})">507호</th>
+				<th style="cursor: pointer;" onclick="detail(${pids.get(11).room})">508호</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -78,14 +97,46 @@
 					<td>${pid.homeroomProf}</td>
 				</c:forEach>
 			</tr>
-			<tr style="background-color: rgba(50,50,50,.5);">
-				<td>dadf</td>
+			<tr style="background-color: rgba(200,200,200,.3);">
+				<c:forEach var="ppd" items="${ppds}">
+					<td>${ppd.subject1}</td>
+				</c:forEach>
+			</tr>
+			<tr style="background-color: rgba(200,200,200,.3);">
+				<c:forEach var="ppd" items="${ppds}">
+					<td>${ppd.subject2}</td>
+				</c:forEach>
+			</tr>
+			<tr style="background-color: rgba(200,200,200,.3);">
+				<c:forEach var="ppd" items="${ppds}">
+					<td>${ppd.prof}</td>
+				</c:forEach>
 			</tr>
 			
 		</tbody>
 	</table>
 </div>
 
+<script>
+
+	function detail(room) {
+		
+		if(room == 0) {
+			return;
+		}
+		
+		var popupX = (document.body.offsetWidth / 2) - (570 / 2);
+		//&nbsp;만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+
+		var popupY = (window.screen.height / 2) - (800 / 2);
+		//&nbsp;만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+		
+		var pop = window.open("/practiceProgress/classtable?cmd=detail&room="+room, "pop",
+		"width=570, height=630, left="+ popupX + ", top="+ popupY+", scrollbars=yes, resizable=yes");
+		
+	}
+
+</script>
 
 </body>
 </html>

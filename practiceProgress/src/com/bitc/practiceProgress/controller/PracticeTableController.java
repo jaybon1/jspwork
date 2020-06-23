@@ -9,16 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bitc.practiceProgress.action.Action;
-import com.bitc.practiceProgress.action.progress.ProgressHomeAction;
-import com.bitc.practiceProgress.action.progress.ProgressInputAction;
+import com.bitc.practiceProgress.action.PracticeTableAction.PracticeTableInputAction;
 
 // http://localhost:8000/blog/user
-@WebServlet("/progress")
-public class ProgressController extends HttpServlet {
-	private final static String TAG = "ProgressController : ";
+@WebServlet("/practicetable")
+public class PracticeTableController extends HttpServlet {
+	private final static String TAG = "PracticeTableController : ";
 	private static final long serialVersionUID = 1L;
 
-	public ProgressController() {
+	public PracticeTableController() {
 		super();
 	}
 
@@ -42,12 +41,8 @@ public class ProgressController extends HttpServlet {
 	}
 
 	public Action router(String cmd) {
-		if (cmd.equals("home")) {
-			// 회원가입 페이지로 이동
-			return new ProgressHomeAction();
-		} else if (cmd.equals("input")) {
-			// 회원가입 페이지로 이동
-			return new ProgressInputAction();
+		if (cmd.equals("input")) {
+			return new PracticeTableInputAction();
 		}
 
 		return null;

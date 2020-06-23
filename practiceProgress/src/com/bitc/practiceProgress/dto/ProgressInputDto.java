@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ProgressInputDto {
+	int room;
 	String className;
 	String homeroomProf;
 }

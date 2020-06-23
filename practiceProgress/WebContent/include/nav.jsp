@@ -19,16 +19,16 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		<a class="navbar-brand" href="/blog/index.jsp">practiceProgress</a>
+		<a class="navbar-brand" href="/practiceProgress/classtable?cmd=home">practiceProgress</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
 		<div class="justify-content-between collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="/practiceProgress/progress?cmd=input">훈련과정등록</a></li>
-				<li class="nav-item"><a class="nav-link" href="">데이터등록</a></li>
-				<li class="nav-item"><a class="nav-link" href="">진행상황</a></li>
+				<li class="nav-item"><a class="nav-link" href="/practiceProgress/classtable?cmd=input">훈련과정등록</a></li>
+				<li class="nav-item"><a class="nav-link" href="/practiceProgress/practicetable?cmd=input">데이터등록</a></li>
+				<li class="nav-item"><a class="nav-link" href="/practiceProgress/classtable?cmd=home">진행상황</a></li>
 		</div>
 	</nav>
 	<br>

@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value=""/>
+		<item key="selection" value="pid"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="true"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="pud"/>
+			<item value="pid"/>
+			<item value="i"/>
+			<item value="pids"/>
 			<item value="style=&quot;width: 8.3%&quot;"/>
 			<item value="br"/>
 			<item value="dt"/>
@@ -19,12 +23,9 @@
 			<item value="utf"/>
 			<item value="ch04"/>
 			<item value="ch"/>
-			<item value="ch03"/>
-			<item value="20000"/>
-			<item value="8005"/>
-			<item value="timeout"/>
 		</list>
 		<list key="replacehistory">
+			<item value="pnds"/>
 			<item value=""/>
 		</list>
 	</section>

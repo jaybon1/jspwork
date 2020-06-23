@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.jaybon.baseball.repository.TeamRepository"/>
-<fullyQualifiedTypeName name="com.jaybon.baseball.model.Team"/>
-<fullyQualifiedTypeName name="com.jaybon.baseball.repository.PlayerRepository"/>
-<fullyQualifiedTypeName name="com.jaybon.baseball.action.Action"/>
-<fullyQualifiedTypeName name="com.jaybon.baseball.model.Player"/>
-<fullyQualifiedTypeName name="com.jaybon.product.action.Action"/>
 <fullyQualifiedTypeName name="jdk.nashorn.internal.ir.RuntimeNode.Request"/>
 <fullyQualifiedTypeName name="com.jaybon.product.model.ProductType"/>
 <fullyQualifiedTypeName name="com.jaybon.product.model.Product"/>
@@ -24,7 +18,6 @@
 <fullyQualifiedTypeName name="com.cos.blog.repository.UsersRepository"/>
 <fullyQualifiedTypeName name="com.cos.blog.model.Users"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
-<fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
 <fullyQualifiedTypeName name="com.cos.blog.util.Script"/>
 <fullyQualifiedTypeName name="java.util.UUID"/>
 <fullyQualifiedTypeName name="java.io.InputStream"/>
@@ -45,19 +38,26 @@
 <fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="java.util.Calendar"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
-<fullyQualifiedTypeName name="com.bitc.practiceProgress.util.Script"/>
-<fullyQualifiedTypeName name="com.bitc.practiceProgress.action.Action"/>
 <fullyQualifiedTypeName name="com.bitc.practiceProgress.db.DBConn"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="oracle.net.aso.c"/>
+<fullyQualifiedTypeName name="com.bitc.practiceProgress.repository.ProgressRepository"/>
+<fullyQualifiedTypeName name="com.bitc.practiceProgress.dto.ProgressInputDto"/>
+<fullyQualifiedTypeName name="com.bitc.practiceProgress.util.Script"/>
+<fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+<fullyQualifiedTypeName name="com.bitc.practiceProgress.model.ClassTable"/>
+<fullyQualifiedTypeName name="com.bitc.practiceProgress.repository.ClassTableRepository"/>
+<fullyQualifiedTypeName name="com.bitc.practiceProgress.dto.ProgressNowDto"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="lombok.Data"/>
 <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
 <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
 <fullyQualifiedTypeName name="lombok.Builder"/>
-<fullyQualifiedTypeName name="java.awt.List"/>
-<fullyQualifiedTypeName name="oracle.net.aso.c"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
-<fullyQualifiedTypeName name="com.bitc.practiceProgress.repository.ProgressRepository"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="com.bitc.practiceProgress.dto.ProgressInputDto"/>
+<fullyQualifiedTypeName name="java.lang.Appendable"/>
+<fullyQualifiedTypeName name="com.bitc.practiceProgress.action.Action"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="com.bitc.practiceProgress.dto.PracticeProgressDto"/>
+<fullyQualifiedTypeName name="com.bitc.practiceProgress.repository.PracticeTableRepository"/>
 </qualifiedTypeNameHistroy>

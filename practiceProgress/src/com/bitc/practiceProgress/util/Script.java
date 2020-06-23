@@ -84,4 +84,20 @@ public class Script {
 		}
 
 	}
+	
+	
+	public static void putScript(String msg, String scriptText, HttpServletResponse response) { // 뒤로가기
+		try {
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('" + msg + "')");
+			out.println(scriptText);
+			out.println("</script>");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 }
