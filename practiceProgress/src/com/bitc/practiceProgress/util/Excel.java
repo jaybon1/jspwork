@@ -3,23 +3,26 @@ package com.bitc.practiceProgress.util;
 import java.io.FileInputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.bitc.practiceProgress.model.PracticeTable;
+
 public class Excel {
-	public static void main(String[] args) {
+	public static List<PracticeTable> getList(String excelFile){
 		// 파일을 읽기위해 엑셀파일을 가져온다
 		FileInputStream fis = null;
 		XSSFWorkbook workbook = null;
 		try {
-			fis = new FileInputStream("c://utils/inputtest.xlsx");
+			fis = new FileInputStream(excelFile);
 			workbook = new XSSFWorkbook(fis);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		int rowindex = 0;
@@ -29,34 +32,69 @@ public class Excel {
 		XSSFSheet sheet = workbook.getSheetAt(0);
 		// 행의 수
 		int rows = sheet.getPhysicalNumberOfRows();
+		
+		List<PracticeTable> practiceTables = new ArrayList<>();
+
 		for (rowindex = 1; rowindex < rows; rowindex++) {
 			// 행을 읽는다
 			XSSFRow row = sheet.getRow(rowindex);
 			if (row != null) {
 				// 셀의 수
 				int cells = row.getPhysicalNumberOfCells();
-				//class_name는 안쓰기때문에 1번컬럼부터
-				for (columnindex = 1; columnindex <= cells; columnindex++) {
+				
+				PracticeTable practiceTable = PracticeTable.builder().build();
+				
+				for (columnindex = 0; columnindex <= cells; columnindex++) {
+					
+					String colData = "";
+					
 					// 셀값을 읽는다
 					XSSFCell cell = row.getCell(columnindex);
 					// 셀이 빈값일경우를 위한 널체크
 					if (cell == null || cell.toString().equals("")) {
-						System.out.println("빈값");
 						continue;
 					}
 					if(columnindex == 1) {
+						
 						Calendar cal = Calendar.getInstance();
 						SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
-						String day = formater.format(cell.getDateCellValue());
-						System.out.println(columnindex + "셀 내용 : " + day);
+						colData = formater.format(cell.getDateCellValue());
 
-					} else if(columnindex == 6|| columnindex == 7|| columnindex == 8) {
-						System.out.println(columnindex + "셀 내용 : " + cell.toString());
+					} else if(columnindex == 0 || columnindex == 6 || columnindex == 7 || columnindex == 8) {
+						
+						colData = cell.toString();
+						
 					} else {
-						System.out.println(columnindex + "셀 내용 : " + cell.getRawValue().toString());
+						
+						colData = cell.getRawValue().toString();
+						
+					}
+					
+					if (columnindex == 0) {
+						practiceTable.setClassName(colData);
+					} else if (columnindex == 1) {
+						practiceTable.setClassDate(colData);
+					} else if (columnindex == 2) {
+						practiceTable.setDayWeek(colData);
+					} else if (columnindex == 3) {
+						practiceTable.setClassTime(Integer.parseInt(colData));
+					} else if (columnindex == 4) {
+						practiceTable.setStartTime(colData);
+					} else if (columnindex == 5) {
+						practiceTable.setEndTime(colData);
+					} else if (columnindex == 6) {
+						practiceTable.setSubject1(colData);
+					} else if (columnindex == 7) {
+						practiceTable.setSubject2(colData);
+					} else if (columnindex == 8) {
+						practiceTable.setProf(colData);
+					} else if (columnindex == 9) {
+						practiceTable.setRoom(Integer.parseInt(colData));
 					}
 				}
+				practiceTables.add(practiceTable);
 			}
 		}
+		return practiceTables;
 	}
 }

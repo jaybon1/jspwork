@@ -25,12 +25,13 @@ public class ClassTableDetailUpdateProcAction implements Action{
 				.classOpen(request.getParameter("classOpen"))
 				.classClose(request.getParameter("classClose"))
 				.homeroomProf(request.getParameter("homeroomProf"))
+				.excelName(request.getParameter("excelName"))
 				.status(request.getParameter("status"))
 				.build();
 		
 		ClassTableRepository classTableRepository = ClassTableRepository.getInstance();
 		
-		int result = classTableRepository.Update(classTable);
+		int result = classTableRepository.update(classTable);
 		
 		if(result == 1) {
 			

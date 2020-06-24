@@ -27,8 +27,9 @@
 		<div class="justify-content-between collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" href="/practiceProgress/classtable?cmd=input">훈련과정등록</a></li>
-				<li class="nav-item"><a class="nav-link" href="/practiceProgress/practicetable?cmd=input">데이터등록</a></li>
+				<li class="nav-item"><a class="nav-link" href="/practiceProgress/practicetable?cmd=input">엑셀데이터등록</a></li>
 				<li class="nav-item"><a class="nav-link" href="/practiceProgress/classtable?cmd=home">진행상황</a></li>
+			</ul>
 		</div>
 	</nav>
 	<br>

@@ -11,9 +11,10 @@ import com.bitc.practiceProgress.db.DBConn;
 import com.bitc.practiceProgress.dto.ProgressInputDto;
 import com.bitc.practiceProgress.dto.PracticeProgressDto;
 import com.bitc.practiceProgress.model.ClassTable;
+import com.bitc.practiceProgress.model.PracticeTable;
 
 public class PracticeTableRepository {
-	private static final String TAG = "ClassTableRepository : "; // TAG 생성 (오류 발견시 용이)
+	private static final String TAG = "PracticeTableRepository : "; // TAG 생성 (오류 발견시 용이)
 	private static PracticeTableRepository instance = new PracticeTableRepository();
 
 	private PracticeTableRepository() {
@@ -27,9 +28,135 @@ public class PracticeTableRepository {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	public List<List<PracticeProgressDto>> findPractice(String classDate) {
+	
+	public int delete(int classId) {
+		final String SQL = "DELETE FROM practice_table WHERE class_id = ?";
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, classId);
+			
+			return pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "delete : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		return -1; // 실패시
+	}
+	
+	
+	public int save(PracticeTable practiceTable,int classId) {
+		final String SQL = "INSERT INTO practice_table(class_name, class_date, day_week, class_time, start_time, end_time, subject1, subject2, prof, room, class_id) "
+				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, practiceTable.getClassName());
+			pstmt.setString(2, practiceTable.getClassDate());
+			pstmt.setString(3, practiceTable.getDayWeek());
+			pstmt.setInt(4, practiceTable.getClassTime());
+			pstmt.setString(5, practiceTable.getStartTime());
+			pstmt.setString(6, practiceTable.getEndTime());
+			pstmt.setString(7, practiceTable.getSubject1());
+			pstmt.setString(8, practiceTable.getSubject2());
+			pstmt.setString(9, practiceTable.getProf());
+			pstmt.setInt(10, practiceTable.getRoom());
+			pstmt.setInt(11, classId);
+			
+			return pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "save : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		return -1; // 실패시
+	}
+	
+	public int saveList(List<PracticeTable> practiceTables,int classId) {
+		
+		final String SQL = "INSERT INTO practice_table(class_name, class_date, day_week, class_time, start_time, end_time, subject1, subject2, prof, room, class_id) "
+				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+		
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			conn.setAutoCommit(false);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		int finalResult = 1;
+		
+		try {
+			
+			for (PracticeTable practiceTable : practiceTables) {
+				
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setString(1, practiceTable.getClassName());
+				pstmt.setString(2, practiceTable.getClassDate());
+				pstmt.setString(3, practiceTable.getDayWeek());
+				pstmt.setInt(4, practiceTable.getClassTime());
+				pstmt.setString(5, practiceTable.getStartTime());
+				pstmt.setString(6, practiceTable.getEndTime());
+				pstmt.setString(7, practiceTable.getSubject1());
+				pstmt.setString(8, practiceTable.getSubject2());
+				pstmt.setString(9, practiceTable.getProf());
+				pstmt.setInt(10, practiceTable.getRoom());
+				pstmt.setInt(11, classId);
+				
+				int result = pstmt.executeUpdate();
+				
+				if(result != 1) {
+					finalResult = 0;
+					break;
+				}	
+			}
+			if(finalResult == 1) {
+				conn.commit();
+				System.out.println("커밋");
+			} else {
+				conn.rollback();
+				System.out.println("롤백");
+			}
+			
+			return finalResult;
+			
+		} catch (Exception e) {
+			System.out.println(TAG + "saveList : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		
+		return -1;
+	}
+	
+	
+	public List<List<PracticeProgressDto>> findPractice(String classDate, List<Integer> idList) {
+		
+		StringBuilder sb = new StringBuilder();
+		if(idList.size()>0) {
+			sb.append("and class_id in (");
+			
+			for (int i = 0; i < idList.size(); i++) {
+				
+				sb.append(idList.get(i));
+				
+				if(i<idList.size()-1) {
+					sb.append(", ");	
+				}
+			}
+		}
+		sb.append(") ");
+		
+		System.out.println(sb.toString());
+		
 		final String SQL = "SELECT room, subject1, subject2, prof, class_time FROM practice_table "
-				+ "WHERE class_date = ? and status = 'true' ";
+				+ "WHERE class_date = ? "
+				+ sb.toString();
 		
 		List<List<PracticeProgressDto>> ppdsList = null;
 		
@@ -92,8 +219,12 @@ public class PracticeTableRepository {
 					classTime = 11;
 				}
 				
+				if(classTime == -1) {
+					break;
+				}
+				
 				ppdsList.get(rs.getInt(5)-1).get(classTime).setSubject1(rs.getString(2));
-				ppdsList.get(rs.getInt(5)-1).get(classTime).setSubject1(rs.getString(3));
+				ppdsList.get(rs.getInt(5)-1).get(classTime).setSubject2(rs.getString(3));
 				ppdsList.get(rs.getInt(5)-1).get(classTime).setProf(rs.getString(4));
 				
 			}
@@ -104,6 +235,113 @@ public class PracticeTableRepository {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(TAG + "findPractice : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+
+		return null; // 실패시
+	}
+	
+	public List<PracticeProgressDto> findPracticeNow(int classTime, String classDate, List<Integer> idList) {
+		
+		StringBuilder sb = new StringBuilder();
+		if(idList.size()>0) {
+			sb.append("and class_id in (");
+			
+			for (int i = 0; i < idList.size(); i++) {
+				
+				sb.append(idList.get(i));
+				
+				if(i<idList.size()-1) {
+					sb.append(", ");	
+				}
+			}
+		}
+		sb.append(") ");
+		
+		System.out.println(sb.toString());
+		
+		
+		final String SQL = "SELECT room, subject1, subject2, prof FROM practice_table "
+				+ "WHERE class_date = ? and  class_time = ? "
+				+ sb.toString();
+		
+		List<PracticeProgressDto> ppds = null;
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, classDate);
+			pstmt.setInt(2, classTime);
+			
+			rs = pstmt.executeQuery();
+			
+			ppds = new ArrayList<>();
+			
+			for (int i = 0; i < 12; i++) {
+				
+				ppds.add(new PracticeProgressDto("","",""));
+				
+			}
+			
+			while (rs.next()) {
+
+				if(rs.getInt(1) == 402) {
+					ppds.get(0).setSubject1(rs.getString(2));
+					ppds.get(0).setSubject2(rs.getString(3));
+					ppds.get(0).setProf(rs.getString(4));
+				} else if (rs.getInt(1) == 403) {
+					ppds.get(1).setSubject1(rs.getString(2));
+					ppds.get(1).setSubject2(rs.getString(3));
+					ppds.get(1).setProf(rs.getString(4));
+				} else if (rs.getInt(1) == 404) {
+					ppds.get(2).setSubject1(rs.getString(2));
+					ppds.get(2).setSubject2(rs.getString(3));
+					ppds.get(2).setProf(rs.getString(4));
+				} else if (rs.getInt(1) == 405) {
+					ppds.get(3).setSubject1(rs.getString(2));
+					ppds.get(3).setSubject2(rs.getString(3));
+					ppds.get(3).setProf(rs.getString(4));
+				} else if (rs.getInt(1) == 501) {
+					ppds.get(4).setSubject1(rs.getString(2));
+					ppds.get(4).setSubject2(rs.getString(3));
+					ppds.get(4).setProf(rs.getString(4));
+				} else if (rs.getInt(1) == 502) {
+					ppds.get(5).setSubject1(rs.getString(2));
+					ppds.get(5).setSubject2(rs.getString(3));
+					ppds.get(5).setProf(rs.getString(4));
+				} else if (rs.getInt(1) == 503) {
+					ppds.get(6).setSubject1(rs.getString(2));
+					ppds.get(6).setSubject2(rs.getString(3));
+					ppds.get(6).setProf(rs.getString(4));
+				} else if (rs.getInt(1) == 504) {
+					ppds.get(7).setSubject1(rs.getString(2));
+					ppds.get(7).setSubject2(rs.getString(3));
+					ppds.get(7).setProf(rs.getString(4));
+				} else if (rs.getInt(1) == 505) {
+					ppds.get(8).setSubject1(rs.getString(2));
+					ppds.get(8).setSubject2(rs.getString(3));
+					ppds.get(8).setProf(rs.getString(4));
+				} else if (rs.getInt(1) == 506) {
+					ppds.get(9).setSubject1(rs.getString(2));
+					ppds.get(9).setSubject2(rs.getString(3));
+					ppds.get(9).setProf(rs.getString(4));
+				} else if (rs.getInt(1) == 507) {
+					ppds.get(10).setSubject1(rs.getString(2));
+					ppds.get(10).setSubject2(rs.getString(3));
+					ppds.get(10).setProf(rs.getString(4));
+				} else if (rs.getInt(1) == 508) {
+					ppds.get(11).setSubject1(rs.getString(2));
+					ppds.get(11).setSubject2(rs.getString(3));
+					ppds.get(11).setProf(rs.getString(4));
+				}
+				
+			}
+		
+			return ppds;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "findPracticeNow : " + e.getMessage());
 		} finally {
 			DBConn.close(conn, pstmt, rs);
 		}

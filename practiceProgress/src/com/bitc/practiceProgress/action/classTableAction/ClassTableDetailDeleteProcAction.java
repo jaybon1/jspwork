@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bitc.practiceProgress.action.Action;
 import com.bitc.practiceProgress.repository.ClassTableRepository;
+import com.bitc.practiceProgress.repository.PracticeTableRepository;
 import com.bitc.practiceProgress.util.Script;
 
 public class ClassTableDetailDeleteProcAction implements Action{
@@ -17,13 +18,21 @@ public class ClassTableDetailDeleteProcAction implements Action{
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		ClassTableRepository classTableRepository = ClassTableRepository.getInstance();
+		PracticeTableRepository practiceTableRepository = PracticeTableRepository.getInstance();
 		
-		int result = classTableRepository.delete(id);
+		int result = practiceTableRepository.delete(id);
 		
-		if(result == 1) {
+		if(result == 1 || result == 0) {
 			
-			Script.putScript("삭제에 성공하였습니다.", "opener.location.reload(); window.close();", response);
+			ClassTableRepository classTableRepository = ClassTableRepository.getInstance();
+			
+			int classResult = classTableRepository.delete(id);
+			
+			if (classResult == 1) {
+				Script.putScript("삭제에 성공하였습니다.", "opener.location.reload(); window.close();", response);			
+			} else {
+				Script.getMessage("엑셀 데이터 삭제에 성공하였습니다만, 훈련과정 삭제에 실패하였습니다.", response);
+			}
 			
 		} else {
 			Script.getMessage("삭제에 실패하였습니다.", response);

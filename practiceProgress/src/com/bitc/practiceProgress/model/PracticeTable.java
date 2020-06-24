@@ -22,5 +22,6 @@ public class PracticeTable {
 	String subject2;
 	String prof;
 	int room;
+	int classId;
 	
 }

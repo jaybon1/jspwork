@@ -27,6 +27,7 @@ public class ClassTableRepository {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	
 	public int delete(int id) {
 		final String SQL = "DELETE FROM class_table WHERE id = ?";
 		try {
@@ -38,7 +39,7 @@ public class ClassTableRepository {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(TAG + "save : " + e.getMessage());
+			System.out.println(TAG + "delete : " + e.getMessage());
 		} finally {
 			DBConn.close(conn, pstmt, rs);
 		}
@@ -46,9 +47,12 @@ public class ClassTableRepository {
 	}
 	
 	
-	public int Update(ClassTable classTable) {
+	
+	
+	
+	public int update(ClassTable classTable) {
 		final String SQL = "UPDATE class_table "
-				+ "SET class_name = ?, class_part = ?, class_open = ?, class_close = ?, homeroom_prof = ?, status = ? "
+				+ "SET class_name = ?, class_part = ?, class_open = ?, class_close = ?, homeroom_prof = ?, excel_name = ?, status = ? "
 				+ "WHERE id = ?";
 		try {
 			conn = DBConn.getConnection(); // DB에 연결
@@ -58,13 +62,71 @@ public class ClassTableRepository {
 			pstmt.setString(3, classTable.getClassOpen());
 			pstmt.setString(4, classTable.getClassClose());
 			pstmt.setString(5, classTable.getHomeroomProf());
-			pstmt.setString(6, classTable.getStatus());
-			pstmt.setInt(7, classTable.getId());
+			pstmt.setString(6, classTable.getExcelName());
+			pstmt.setString(7, classTable.getStatus());
+			pstmt.setInt(8, classTable.getId());
 			
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(TAG + "save : " + e.getMessage());
+			System.out.println(TAG + "update : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		return -1; // 실패시
+	}
+	
+	public int updateExcelName(String fileName, int classId) {
+		final String SQL = "UPDATE class_table SET excel_name = ? "
+				+ "WHERE id = ?";
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, fileName);
+			pstmt.setInt(2, classId);
+			
+			return pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "updateExcelName : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		return -1; // 실패시
+	}
+	
+	
+	public int updateStatusTrue(int id) {
+		final String SQL = "UPDATE class_table SET status = 'true' WHERE id = ? ";
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, id);
+			
+			return pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "updateStatusTrue : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		return -1; // 실패시
+	}
+	
+	public int updateStatusFalse(int id) {
+		final String SQL = "UPDATE class_table SET status = 'false' WHERE id = ? ";
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, id);
+			
+			return pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "updateStatusFalse : " + e.getMessage());
 		} finally {
 			DBConn.close(conn, pstmt, rs);
 		}
@@ -74,7 +136,7 @@ public class ClassTableRepository {
 	
 	public int save(ClassTable classTable) {
 		final String SQL = "INSERT INTO class_table(room, class_name, class_part, class_open, class_close, homeroom_prof, status) "
-				+ "VALUES(?, ?, ?, ?, ?, ?, 'false') ";
+				+ "VALUES(?, ?, ?, ?, ?, ?, 'true') ";
 		try {
 			conn = DBConn.getConnection(); // DB에 연결
 			pstmt = conn.prepareStatement(SQL);
@@ -98,7 +160,7 @@ public class ClassTableRepository {
 	
 	
 	public ClassTable findByRoom(int room) {
-		final String SQL = "SELECT id, room, class_name, class_part, class_open, class_close, homeroom_prof, status "
+		final String SQL = "SELECT id, room, class_name, class_part, class_open, class_close, homeroom_prof, excel_name, status "
 				+ "FROM class_table WHERE room = ? and status = 'true' ";
 		
 		ClassTable classTable = null;
@@ -121,7 +183,8 @@ public class ClassTableRepository {
 						.classOpen(rs.getString(5))
 						.classClose(rs.getString(6))
 						.homeroomProf(rs.getString(7))
-						.status(rs.getString(8))
+						.excelName(rs.getString(8))
+						.status(rs.getString(9))
 						.build();
 			}
 		
@@ -137,6 +200,127 @@ public class ClassTableRepository {
 		
 		return null;
 	}
+	
+	public List<Integer> findIdList() {
+		final String SQL = "SELECT id FROM class_table WHERE status = 'true' ";
+		
+		List<Integer> idList = null;
+		
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+
+			rs = pstmt.executeQuery();
+			
+			idList = new ArrayList<>();
+
+			while (rs.next()) {
+				
+				idList.add(rs.getInt(1));
+				
+			}
+		
+			return idList;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "findIdList : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		
+		
+		return null;
+	}
+	
+	
+	public List<ClassTable> findTrueClass() {
+		final String SQL = "SELECT id, room, class_name, class_part, class_open, class_close, homeroom_prof, excel_name, status "
+				+ "FROM class_table WHERE status = 'true' ORDER BY room ";
+		
+		List<ClassTable> classTables = null;
+		
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+
+			rs = pstmt.executeQuery();
+			
+			classTables = new ArrayList<>();
+
+			while (rs.next()) {
+				ClassTable classTable = ClassTable.builder()
+						.id(rs.getInt(1))
+						.room(rs.getInt(2))
+						.className(rs.getString(3))
+						.classPart(rs.getString(4))
+						.classOpen(rs.getString(5))
+						.classClose(rs.getString(6))
+						.homeroomProf(rs.getString(7))
+						.excelName(rs.getString(8))
+						.status(rs.getString(9))
+						.build();
+				
+				classTables.add(classTable);
+			}
+		
+			return classTables;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "findTrueClass : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		
+		
+		return null;
+	}
+	
+	public List<ClassTable> findFalseClass() {
+		final String SQL = "SELECT id, room, class_name, class_part, class_open, class_close, homeroom_prof, excel_name, status "
+				+ "FROM class_table WHERE status = 'false' ORDER BY class_open DESC ";
+		
+		List<ClassTable> classTables = null;
+		
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+
+			rs = pstmt.executeQuery();
+			
+			classTables = new ArrayList<>();
+
+			while (rs.next()) {
+				ClassTable classTable = ClassTable.builder()
+						.id(rs.getInt(1))
+						.room(rs.getInt(2))
+						.className(rs.getString(3))
+						.classPart(rs.getString(4))
+						.classOpen(rs.getString(5))
+						.classClose(rs.getString(6))
+						.homeroomProf(rs.getString(7))
+						.excelName(rs.getString(8))
+						.status(rs.getString(9))
+						.build();
+				
+				classTables.add(classTable);
+				
+			}
+		
+			return classTables;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "findFalseClass : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		
+		
+		return null;
+	}
+	
 	
 	// 호실, 훈련명, 담임선생님을 불러옴
 	public List<ProgressInputDto> findClassNameHomeroomProf() {
@@ -221,92 +405,5 @@ public class ClassTableRepository {
 
 		return null; // 실패시
 	}
-	
-	
-	public List<PracticeProgressDto> findPracticeNow(int classTime, String classDate) {
-		final String SQL = "SELECT room, subject1, subject2, prof FROM practice_table "
-				+ "WHERE class_time = ? and class_date = ? and status = 'true' ";
-		
-		List<PracticeProgressDto> ppds = null;
-		try {
-			conn = DBConn.getConnection(); // DB에 연결
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, classTime);
-			pstmt.setString(2, classDate);
-			
-			rs = pstmt.executeQuery();
-			
-			ppds = new ArrayList<>();
-			
-			for (int i = 0; i < 12; i++) {
-				
-				ppds.add(new PracticeProgressDto("","",""));
-				
-			}
-			
-			while (rs.next()) {
 
-				if(rs.getInt(1) == 402) {
-					ppds.get(0).setSubject1(rs.getString(2));
-					ppds.get(0).setSubject2(rs.getString(3));
-					ppds.get(0).setProf(rs.getString(4));
-				} else if (rs.getInt(1) == 403) {
-					ppds.get(1).setSubject1(rs.getString(2));
-					ppds.get(1).setSubject2(rs.getString(3));
-					ppds.get(1).setProf(rs.getString(4));
-				} else if (rs.getInt(1) == 404) {
-					ppds.get(2).setSubject1(rs.getString(2));
-					ppds.get(2).setSubject2(rs.getString(3));
-					ppds.get(2).setProf(rs.getString(4));
-				} else if (rs.getInt(1) == 405) {
-					ppds.get(3).setSubject1(rs.getString(2));
-					ppds.get(3).setSubject2(rs.getString(3));
-					ppds.get(3).setProf(rs.getString(4));
-				} else if (rs.getInt(1) == 501) {
-					ppds.get(4).setSubject1(rs.getString(2));
-					ppds.get(4).setSubject2(rs.getString(3));
-					ppds.get(4).setProf(rs.getString(4));
-				} else if (rs.getInt(1) == 502) {
-					ppds.get(5).setSubject1(rs.getString(2));
-					ppds.get(5).setSubject2(rs.getString(3));
-					ppds.get(5).setProf(rs.getString(4));
-				} else if (rs.getInt(1) == 503) {
-					ppds.get(6).setSubject1(rs.getString(2));
-					ppds.get(6).setSubject2(rs.getString(3));
-					ppds.get(6).setProf(rs.getString(4));
-				} else if (rs.getInt(1) == 504) {
-					ppds.get(7).setSubject1(rs.getString(2));
-					ppds.get(7).setSubject2(rs.getString(3));
-					ppds.get(7).setProf(rs.getString(4));
-				} else if (rs.getInt(1) == 505) {
-					ppds.get(8).setSubject1(rs.getString(2));
-					ppds.get(8).setSubject2(rs.getString(3));
-					ppds.get(8).setProf(rs.getString(4));
-				} else if (rs.getInt(1) == 506) {
-					ppds.get(9).setSubject1(rs.getString(2));
-					ppds.get(9).setSubject2(rs.getString(3));
-					ppds.get(9).setProf(rs.getString(4));
-				} else if (rs.getInt(1) == 507) {
-					ppds.get(10).setSubject1(rs.getString(2));
-					ppds.get(10).setSubject2(rs.getString(3));
-					ppds.get(10).setProf(rs.getString(4));
-				} else if (rs.getInt(1) == 508) {
-					ppds.get(11).setSubject1(rs.getString(2));
-					ppds.get(11).setSubject2(rs.getString(3));
-					ppds.get(11).setProf(rs.getString(4));
-				}
-				
-			}
-		
-			return ppds;
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println(TAG + "findPracticeNow : " + e.getMessage());
-		} finally {
-			DBConn.close(conn, pstmt, rs);
-		}
-
-		return null; // 실패시
-	}
 }

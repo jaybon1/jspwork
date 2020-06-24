@@ -4,8 +4,23 @@
 
 <%@include file="../include/nav.jsp"%>
 
-<div class="container">
-	<h2>훈련과정등록</h2>
+<style>
+
+td {
+	max-width: 48px !important;
+	overflow: hidden;
+}
+
+.nowTimeColor{
+	background-color: rgba(200,200,200,.3);
+}
+
+
+
+</style>
+
+<div class="container-fluid">
+	<h2>훈련과정 등록</h2>
 	<br />
 	<form action="/practiceProgress/classtable?cmd=inputProc" method="post">
 		<div class="input-group mb-3">
@@ -66,7 +81,7 @@
 	<br /> <br />
 	<h3>현시간 훈련진행상황</h3>
 	<br />
-	<p>호실을 누르면 상세보기 화면을 보실 수 있습니다:</p>
+	<p>호실을 누르면 상세보기 화면을 보실 수 있습니다</p>
 	<br />
 	<table class="table .table-bordered text-center">
 		<thead>
@@ -97,17 +112,18 @@
 					<td>${pid.homeroomProf}</td>
 				</c:forEach>
 			</tr>
-			<tr style="background-color: rgba(200,200,200,.3);">
+			
+			<tr class="nowTimeColor">
 				<c:forEach var="ppd" items="${ppds}">
 					<td>${ppd.subject1}</td>
 				</c:forEach>
 			</tr>
-			<tr style="background-color: rgba(200,200,200,.3);">
+			<tr class="nowTimeColor">
 				<c:forEach var="ppd" items="${ppds}">
 					<td>${ppd.subject2}</td>
 				</c:forEach>
 			</tr>
-			<tr style="background-color: rgba(200,200,200,.3);">
+			<tr class="nowTimeColor">
 				<c:forEach var="ppd" items="${ppds}">
 					<td>${ppd.prof}</td>
 				</c:forEach>
@@ -125,18 +141,17 @@
 			return;
 		}
 		
+		// - (570 / 2) 등은 창 위치 조정을 위함
+		
 		var popupX = (document.body.offsetWidth / 2) - (570 / 2);
-		//&nbsp;만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
 
 		var popupY = (window.screen.height / 2) - (800 / 2);
-		//&nbsp;만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
 		
 		var pop = window.open("/practiceProgress/classtable?cmd=detail&room="+room, "pop",
-		"width=570, height=630, left="+ popupX + ", top="+ popupY+", scrollbars=yes, resizable=yes");
+		"width=570, height=700, left="+ popupX + ", top="+ popupY+", scrollbars=yes, resizable=yes");
 		
 	}
 
 </script>
 
-</body>
-</html>
+<%@include file="../include/footer.jsp"%>

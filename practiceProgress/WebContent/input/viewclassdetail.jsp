@@ -16,14 +16,14 @@
 		<form action="/practiceProgress/classtable?cmd=detailUpdateProc" method="post">
 			<div class="text-center">
 				<h2>${classTable.room }호상세보기</h2>
-				<input name="id" type="hidden" value="${classTable.id }">
+				<input name="id" type="hidden" value="${classTable.id }"> <input name="room" type="hidden" value="${classTable.room }">
 			</div>
 			<br />
 			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th>강의실</th>
-						<th><input name="room" value="${classTable.room }" readonly="readonly"></th>
+						<th>${classTable.room }</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -80,6 +80,10 @@
 						<td><input name="homeroomProf" type="text" style="width: 100%" value="${classTable.homeroomProf }" required="required"></td>
 					</tr>
 					<tr>
+						<td>파일명</td>
+						<td><input name="excelName" type="text" style="width: 100%" value="${classTable.excelName }" ></td>
+					</tr>
+					<tr>
 						<td>상태</td>
 						<td><select name="status" required="required">
 								<option value="${classTable.status }">${classTable.status }</option>
@@ -92,7 +96,6 @@
 									</c:otherwise>
 								</c:choose>
 						</select></td>
-						<%-- 						<td><input type="text" style="width: 100%" value="${classTable.status }"></td> --%>
 					</tr>
 
 				</tbody>

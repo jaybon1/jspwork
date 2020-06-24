@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bitc.practiceProgress.action.Action;
+import com.bitc.practiceProgress.action.PracticeTableAction.PracticeTableActivateProcAction;
+import com.bitc.practiceProgress.action.PracticeTableAction.PracticeTableAddExcelAction;
+import com.bitc.practiceProgress.action.PracticeTableAction.PracticeTableAddExcelProcAction;
+import com.bitc.practiceProgress.action.PracticeTableAction.PracticeTableDeActivateProcAction;
 import com.bitc.practiceProgress.action.PracticeTableAction.PracticeTableInputAction;
 
 // http://localhost:8000/blog/user
@@ -43,6 +47,14 @@ public class PracticeTableController extends HttpServlet {
 	public Action router(String cmd) {
 		if (cmd.equals("input")) {
 			return new PracticeTableInputAction();
+		} else if (cmd.equals("activateProc")) {
+			return new PracticeTableActivateProcAction();
+		} else if (cmd.equals("deActivateProc")) {
+			return new PracticeTableDeActivateProcAction();
+		} else if (cmd.equals("addExcel")) {
+			return new PracticeTableAddExcelAction();
+		} else if (cmd.equals("addExcelProc")) {
+			return new PracticeTableAddExcelProcAction();
 		}
 
 		return null;

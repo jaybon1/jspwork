@@ -17,5 +17,6 @@ public class ClassTable {
 	String classOpen;
 	String classClose;
 	String homeroomProf;
+	String excelName;
 	String status;
 }

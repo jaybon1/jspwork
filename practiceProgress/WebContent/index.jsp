@@ -5,3 +5,4 @@
 	response.sendRedirect("/practiceProgress/classtable?cmd=home");
 
 %>
+<%@include file="include/footer.jsp"%>

@@ -36,7 +36,7 @@ public class GetExcel {
 				// 셀의 수
 				int cells = row.getPhysicalNumberOfCells();
 				//class_name는 안쓰기때문에 1번컬럼부터
-				for (columnindex = 1; columnindex <= cells; columnindex++) {
+				for (columnindex = 0; columnindex <= cells; columnindex++) {
 					// 셀값을 읽는다
 					XSSFCell cell = row.getCell(columnindex);
 					// 셀이 빈값일경우를 위한 널체크
@@ -50,7 +50,7 @@ public class GetExcel {
 						String day = formater.format(cell.getDateCellValue());
 						System.out.println(columnindex + "셀 내용 : " + day);
 
-					} else if(columnindex == 6|| columnindex == 7|| columnindex == 8) {
+					} else if(columnindex == 0|| columnindex == 6|| columnindex == 7|| columnindex == 8) {
 						System.out.println(columnindex + "셀 내용 : " + cell.toString());
 					} else {
 						System.out.println(columnindex + "셀 내용 : " + cell.getRawValue().toString());

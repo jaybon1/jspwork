@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bitc.practiceProgress.action.Action;
 import com.bitc.practiceProgress.dto.PracticeProgressDto;
+import com.bitc.practiceProgress.dto.ProgressInputDto;
+import com.bitc.practiceProgress.model.ClassTable;
+import com.bitc.practiceProgress.repository.ClassTableRepository;
 import com.bitc.practiceProgress.repository.PracticeTableRepository;
 
 public class PracticeTableInputAction implements Action{
@@ -23,10 +26,13 @@ public class PracticeTableInputAction implements Action{
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 		String classDate = formater.format(cal.getTime());
 		
-		PracticeTableRepository practiceTableRepository = PracticeTableRepository.getInstance();
-		List<List<PracticeProgressDto>> ppdsList = practiceTableRepository.findPractice(classDate);
+		ClassTableRepository classTableRepository = ClassTableRepository.getInstance();
 		
-		request.setAttribute("ppdsList", ppdsList);
+		List<ClassTable> trueClassTables = classTableRepository.findTrueClass();
+		List<ClassTable> falseClassTables = classTableRepository.findFalseClass();
+		
+		request.setAttribute("trueClassTables", trueClassTables);
+		request.setAttribute("falseClassTables", falseClassTables);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/input/inputdata.jsp");
 		rd.forward(request, response);

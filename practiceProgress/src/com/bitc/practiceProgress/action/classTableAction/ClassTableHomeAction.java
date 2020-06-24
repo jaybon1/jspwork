@@ -25,11 +25,13 @@ public class ClassTableHomeAction implements Action{
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 		String classDate = formater.format(cal.getTime());
 		
-		ClassTableRepository progressRepository = ClassTableRepository.getInstance();
-		PracticeTableRepository practiceTableRepository = PracticeTableRepository.getInstance();		
+		ClassTableRepository classTableRepository = ClassTableRepository.getInstance();
+		PracticeTableRepository practiceTableRepository = PracticeTableRepository.getInstance();	
 		
-		List<ProgressInputDto> pids = progressRepository.findClassNameHomeroomProf();
-		List<List<PracticeProgressDto>> ppdsList = practiceTableRepository.findPractice(classDate);
+		List<Integer> idList = classTableRepository.findIdList();
+		
+		List<ProgressInputDto> pids = classTableRepository.findClassNameHomeroomProf();
+		List<List<PracticeProgressDto>> ppdsList = practiceTableRepository.findPractice(classDate, idList);
 		
 		request.setAttribute("pids", pids);
 		request.setAttribute("ppdsList", ppdsList);

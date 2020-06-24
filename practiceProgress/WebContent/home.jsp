@@ -2,8 +2,12 @@
 
 <%@include file="include/nav.jsp"%>
 
+<%
+	pageContext.setAttribute("tdHeight", 60); //높이 조절
+%>
+
 <style>
-<!--
+
 .table td {
 	padding: 2px;
 }
@@ -12,7 +16,11 @@
 	padding: 2px;
 }
 
--->
+td {
+	max-width: 48px !important;
+	overflow: hidden;
+}
+
 </style>
 
 <div class="container-fluid" style="font-size: 10px;">
@@ -51,7 +59,7 @@
 				</c:forEach>
 			</tr>
 			<tr>
-				<td rowspan="3" style="height: 70px;">1</td>
+				<td rowspan="3" style="height: ${pageScope.tdHeight}px">1</td>
 				<c:forEach var="ppd" items="${ppdsList.get(0)}">
 					<td>${ppd.subject1}</td>
 				</c:forEach>
@@ -66,48 +74,126 @@
 					<td>${ppd.prof}</td>
 				</c:forEach>
 			</tr>
+			
 			<tr>
-				<td>2</td>
+				<td rowspan="3" style="height: ${pageScope.tdHeight}px">2</td>
 				<c:forEach var="ppd" items="${ppdsList.get(1)}">
 					<td>${ppd.subject1}</td>
 				</c:forEach>
 			</tr>
 			<tr>
-				<td>3</td>
+				<c:forEach var="ppd" items="${ppdsList.get(1)}">
+					<td>${ppd.subject2}</td>
+				</c:forEach>
+			</tr>
+			<tr>
+				<c:forEach var="ppd" items="${ppdsList.get(1)}">
+					<td>${ppd.prof}</td>
+				</c:forEach>
+			</tr>
+			
+			<tr>
+				<td rowspan="3" style="height: ${pageScope.tdHeight}px">3</td>
 				<c:forEach var="ppd" items="${ppdsList.get(2)}">
 					<td>${ppd.subject1}</td>
 				</c:forEach>
 			</tr>
 			<tr>
-				<td>4</td>
+				<c:forEach var="ppd" items="${ppdsList.get(2)}">
+					<td>${ppd.subject2}</td>
+				</c:forEach>
+			</tr>
+			<tr>
+				<c:forEach var="ppd" items="${ppdsList.get(2)}">
+					<td>${ppd.prof}</td>
+				</c:forEach>
+			</tr>
+			
+			<tr>
+				<td rowspan="3" style="height: ${pageScope.tdHeight}px">4</td>
 				<c:forEach var="ppd" items="${ppdsList.get(3)}">
 					<td>${ppd.subject1}</td>
 				</c:forEach>
 			</tr>
 			<tr>
-				<td>5</td>
+				<c:forEach var="ppd" items="${ppdsList.get(3)}">
+					<td>${ppd.subject2}</td>
+				</c:forEach>
+			</tr>
+			<tr>
+				<c:forEach var="ppd" items="${ppdsList.get(3)}">
+					<td>${ppd.prof}</td>
+				</c:forEach>
+			</tr>
+			
+			<tr>
+				<td rowspan="3" style="height: ${pageScope.tdHeight}px">5</td>
 				<c:forEach var="ppd" items="${ppdsList.get(4)}">
 					<td>${ppd.subject1}</td>
 				</c:forEach>
 			</tr>
 			<tr>
-				<td>6</td>
+				<c:forEach var="ppd" items="${ppdsList.get(4)}">
+					<td>${ppd.subject2}</td>
+				</c:forEach>
+			</tr>
+			<tr>
+				<c:forEach var="ppd" items="${ppdsList.get(4)}">
+					<td>${ppd.prof}</td>
+				</c:forEach>
+			</tr>
+			
+			<tr>
+				<td rowspan="3" style="height: ${pageScope.tdHeight}px">6</td>
 				<c:forEach var="ppd" items="${ppdsList.get(5)}">
 					<td>${ppd.subject1}</td>
 				</c:forEach>
 			</tr>
 			<tr>
-				<td>7</td>
+				<c:forEach var="ppd" items="${ppdsList.get(5)}">
+					<td>${ppd.subject2}</td>
+				</c:forEach>
+			</tr>
+			<tr>
+				<c:forEach var="ppd" items="${ppdsList.get(5)}">
+					<td>${ppd.prof}</td>
+				</c:forEach>
+			</tr>
+			
+			<tr>
+				<td rowspan="3" style="height: ${pageScope.tdHeight}px">7</td>
 				<c:forEach var="ppd" items="${ppdsList.get(6)}">
 					<td>${ppd.subject1}</td>
 				</c:forEach>
 			</tr>
 			<tr>
-				<td>8</td>
+				<c:forEach var="ppd" items="${ppdsList.get(6)}">
+					<td>${ppd.subject2}</td>
+				</c:forEach>
+			</tr>
+			<tr>
+				<c:forEach var="ppd" items="${ppdsList.get(6)}">
+					<td>${ppd.prof}</td>
+				</c:forEach>
+			</tr>
+			
+			<tr>
+				<td rowspan="3" style="height: ${pageScope.tdHeight}px">8</td>
 				<c:forEach var="ppd" items="${ppdsList.get(7)}">
 					<td>${ppd.subject1}</td>
+				</c:forEach>
+			</tr>
+			<tr>
+				<c:forEach var="ppd" items="${ppdsList.get(7)}">
+					<td>${ppd.subject2}</td>
+				</c:forEach>
+			</tr>
+			<tr>
+				<c:forEach var="ppd" items="${ppdsList.get(7)}">
+					<td>${ppd.prof}</td>
 				</c:forEach>
 			</tr>
 		</tbody>
 	</table>
 </div>
+<%@include file="include/footer.jsp"%>
