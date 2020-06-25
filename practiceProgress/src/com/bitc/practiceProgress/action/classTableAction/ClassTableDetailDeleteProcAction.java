@@ -22,20 +22,24 @@ public class ClassTableDetailDeleteProcAction implements Action{
 		
 		int result = practiceTableRepository.delete(id);
 		
-		if(result == 1 || result == 0) {
+		System.out.println("result" +result);
+		
+		if(result >= 0) {
 			
 			ClassTableRepository classTableRepository = ClassTableRepository.getInstance();
 			
 			int classResult = classTableRepository.delete(id);
 			
+			System.out.println("classResult" +classResult);
+			
 			if (classResult == 1) {
 				Script.putScript("삭제에 성공하였습니다.", "opener.location.reload(); window.close();", response);			
 			} else {
-				Script.getMessage("엑셀 데이터 삭제에 성공하였습니다만, 훈련과정 삭제에 실패하였습니다.", response);
+				Script.putScript("엑셀 데이터 삭제에 성공하였습니다만, 훈련과정 삭제에 실패하였습니다.", "opener.location.reload(); window.close();", response);
 			}
 			
 		} else {
-			Script.getMessage("삭제에 실패하였습니다.", response);
+			Script.putScript("삭제에 실패하였습니다.", "opener.location.reload(); window.close();", response);
 		}
 		
 	}

@@ -2,13 +2,13 @@
 <%@include file="../include/nav.jsp"%>
 
 	<div class="container">
-		<h2>엑셀 데이터 등록</h2>
+		<h2>현재 과정</h2>
 		<p>아래 사항들을 확인하고 엑셀 데이터를 세팅해주세요</p>
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>호실</th>
-					<th>수업명</th>
+					<th>훈련명</th>
 					<th>기간</th>
 					<th>담임</th>
 					<th></th>
@@ -17,7 +17,7 @@
 			<tbody>
 				<c:forEach var="trueClassTable" items="${trueClassTables}">
 					<tr>
-						<td>${trueClassTable.room}호</td>
+						<td id="room${trueClassTable.room}">${trueClassTable.room}호</td>
 						<td>${trueClassTable.className }</td>
 						<td>${trueClassTable.classOpen} ~ ${trueClassTable.classClose}</td>
 						<td>${trueClassTable.homeroomProf }</td>
@@ -27,7 +27,9 @@
 									<button type="button" class="btn btn-outline-primary btn-sm" onclick="addExcel(${trueClassTable.id})">등록하기</button>
 								</c:when>
 								<c:otherwise>
-									<button type="button" class="btn btn-outline-warning btn-sm">변경하기</button>
+									<button type="button" class="btn btn-outline-warning btn-sm" onclick="changeExcel(${trueClassTable.id})">변경하기</button>
+									<button type="button" class="btn btn-outline-info btn-sm" 
+									onclick="statistics(${trueClassTable.id}, ${trueClassTable.room}, '${trueClassTable.classOpen}', '${trueClassTable.classClose}')">검증</button>
 								</c:otherwise>
 							</c:choose>
 						</td>
@@ -41,7 +43,7 @@
 	<br/>
 	<br/>
 	<div class="container">
-		<h2>비활성화 과정</h2>
+		<h2>비활성 과정</h2>
 		<br />
 		<table class="table table-striped">
 			<thead>
@@ -61,7 +63,7 @@
 						<td>${falseClassTable.classOpen}~ ${falseClassTable.classClose}</td>
 						<td>${falseClassTable.homeroomProf }</td>
 						<td>
-							<button type="button" class="btn btn-outline-danger btn-sm" onclick="activateProc(${falseClassTable.id})">활성화</button>
+							<button type="button" class="btn btn-outline-danger btn-sm" onclick="activateProc(${falseClassTable.id}, ${falseClassTable.room})">활성화</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -73,16 +75,42 @@
 	
 	<script type="text/javascript">
 	
+		function statistics(id, room, classOpen, classClose) {
+			
+			// - (570 / 2) 등은 창 위치 조정을 위함
+			
+			var popupX = (document.body.offsetWidth / 2) - (700 / 2);
+
+			var popupY = (window.screen.height / 2) - (800 / 2);
+			
+			var pop = window.open("/practiceProgress/practicetable?cmd=statistics&id="+id+"&room="+room+"&classOpen="+classOpen+"&classClose="+classClose, "pop",
+			"width=700, height=630, left="+ popupX + ", top="+ popupY+", scrollbars=yes, resizable=yes");
+			
+		}
+	
+		function changeExcel(id) {
+			
+			// - (570 / 2) 등은 창 위치 조정을 위함
+			
+			var popupX = (document.body.offsetWidth / 2) - (700 / 2);
+
+			var popupY = (window.screen.height / 2) - (750 / 2);
+			
+			var pop = window.open("/practiceProgress/practicetable?cmd=changeExcel&id="+id, "pop",
+			"width=700, height=630, left="+ popupX + ", top="+ popupY+", scrollbars=yes, resizable=yes");
+			
+		}
+	
 		function addExcel(id) {
 			
 			// - (570 / 2) 등은 창 위치 조정을 위함
 			
 			var popupX = (document.body.offsetWidth / 2) - (570 / 2);
 
-			var popupY = (window.screen.height / 2) - (800 / 2);
+			var popupY = (window.screen.height / 2) - (400 / 2);
 			
 			var pop = window.open("/practiceProgress/practicetable?cmd=addExcel&id="+id, "pop",
-			"width=570, height=630, left="+ popupX + ", top="+ popupY+", scrollbars=yes, resizable=yes");
+			"width=570, height=400, left="+ popupX + ", top="+ popupY+", scrollbars=yes, resizable=yes");
 			
 		}
 	
@@ -95,8 +123,7 @@
 				dataType: "text"
 				
 			}).done(function(result) {
-				
-				alert("비활성화 되었습니다.");
+			
 				location.reload();
 				
 			}).fail(function(error) {
@@ -107,18 +134,20 @@
 			
 		}
 	
-		function activateProc(id) {
+		function activateProc(id, room) {
 			
 			$.ajax({
 				
 				type: "get",
-				url: "/practiceProgress/practicetable?cmd=activateProc&id="+id,
+				url: "/practiceProgress/practicetable?cmd=activateProc&id="+id+"&room="+room,
 				dataType: "text"
 				
 			}).done(function(result) {
-				
-				alert("활성화 되었습니다.");
-				location.reload();
+				if(result == 2){
+					alert("활성 상태의 같은 번호의 강의실이 있습니다.");
+				} else{
+					location.reload();					
+				}
 				
 			}).fail(function(error) {
 				

@@ -12,7 +12,13 @@ td {
 }
 
 .nowTimeColor{
-	background-color: rgba(200,200,200,.3);
+	background-color: rgba(178,204,255,.2);
+}
+
+
+
+thead tr th:hover {
+	background-color: #e9ecef;
 }
 
 
@@ -27,7 +33,7 @@ td {
 			<div class="input-group-prepend">
 				<span class="input-group-text">강의실</span>
 			</div>
-			<select name="room" required="required">
+			<select id="sel1" name="room" required="required" onchange="validation(this.value)">
 				<option value="">선택</option>
 				<option value="402">402</option>
 				<option value="403">403</option>
@@ -86,18 +92,18 @@ td {
 	<table class="table .table-bordered text-center">
 		<thead>
 			<tr>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(0).room})">402호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(1).room})">403호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(2).room})">404호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(3).room})">405호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(4).room})">501호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(5).room})">502호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(6).room})">503호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(7).room})">504호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(8).room})">505호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(9).room})">506호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(10).room})">507호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(11).room})">508호</th>
+				<th class="rooms" style="cursor: pointer;" onclick="detail(${pids.get(0).room})">402호</th>
+				<th class="rooms" style="cursor: pointer;" onclick="detail(${pids.get(1).room})">403호</th>
+				<th class="rooms" style="cursor: pointer;" onclick="detail(${pids.get(2).room})">404호</th>
+				<th	class="rooms" style="cursor: pointer;" onclick="detail(${pids.get(3).room})">405호</th>
+				<th	class="rooms" style="cursor: pointer;" onclick="detail(${pids.get(4).room})">501호</th>
+				<th class="rooms" style="cursor: pointer;" onclick="detail(${pids.get(5).room})">502호</th>
+				<th class="rooms" style="cursor: pointer;" onclick="detail(${pids.get(6).room})">503호</th>
+				<th class="rooms" style="cursor: pointer;" onclick="detail(${pids.get(7).room})">504호</th>
+				<th class="rooms" style="cursor: pointer;" onclick="detail(${pids.get(8).room})">505호</th>
+				<th class="rooms" style="cursor: pointer;" onclick="detail(${pids.get(9).room})">506호</th>
+				<th class="rooms" style="cursor: pointer;" onclick="detail(${pids.get(10).room})">507호</th>
+				<th class="rooms" style="cursor: pointer;" onclick="detail(${pids.get(11).room})">508호</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -135,6 +141,18 @@ td {
 
 <script>
 
+	function validation(room) {
+		
+		for (var i = 0; i < 12; i++) {
+			if($(".rooms").get(i).getAttribute("onclick") == "detail("+room+")"){
+				alert("활성화된 훈련과정이 있는 강의실은 선택할 수 없습니다.");
+				$("#sel1").val("").attr("selected", "selected");
+// 				location.reload();
+				return;
+			}
+		}
+	}
+
 	function detail(room) {
 		
 		if(room == 0) {
@@ -148,7 +166,7 @@ td {
 		var popupY = (window.screen.height / 2) - (800 / 2);
 		
 		var pop = window.open("/practiceProgress/classtable?cmd=detail&room="+room, "pop",
-		"width=570, height=700, left="+ popupX + ", top="+ popupY+", scrollbars=yes, resizable=yes");
+		"width=770, height=720, left="+ popupX + ", top="+ popupY+", scrollbars=yes, resizable=yes");
 		
 	}
 

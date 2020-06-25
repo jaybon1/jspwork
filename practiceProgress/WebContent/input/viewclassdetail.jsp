@@ -16,7 +16,8 @@
 		<form action="/practiceProgress/classtable?cmd=detailUpdateProc" method="post">
 			<div class="text-center">
 				<h2>${classTable.room }호상세보기</h2>
-				<input name="id" type="hidden" value="${classTable.id }"> <input name="room" type="hidden" value="${classTable.room }">
+				<input name="id" type="hidden" value="${classTable.id }"> 
+				<input name="room" type="hidden" value="${classTable.room }">
 			</div>
 			<br />
 			<table class="table table-striped">
@@ -81,21 +82,39 @@
 					</tr>
 					<tr>
 						<td>파일명</td>
-						<td><input name="excelName" type="text" style="width: 100%" value="${classTable.excelName }" ></td>
+						<c:choose>
+							<c:when test="${empty classTable.excelName }">
+								<td><input name="excelName" type="text" style="width: 100%" value="${classTable.excelName }" ></td>
+							</c:when>
+							<c:otherwise>
+								<td>${classTable.excelName }</td>
+								<input name="excelName" type="hidden" value="${classTable.excelName}">
+							</c:otherwise>
+						</c:choose>
 					</tr>
 					<tr>
 						<td>상태</td>
-						<td><select name="status" required="required">
-								<option value="${classTable.status }">${classTable.status }</option>
-								<c:choose>
-									<c:when test="${classTable.status }">
-										<option value="false">false</option>
-									</c:when>
-									<c:otherwise>
-										<option value="true">true</option>
-									</c:otherwise>
-								</c:choose>
-						</select></td>
+						<c:choose>
+							<c:when test="${classTable.status eq 'true'}">
+								<td>활성화</td>
+								<input name="status" type="hidden" value="${classTable.status}">
+							</c:when>
+							<c:otherwise>
+								<td>비활성화</td>
+								<input name="status" type="hidden" value="${classTable.status}">
+							</c:otherwise>
+						</c:choose>
+<!-- 						<td><select name="status" required="required"> -->
+<%-- 								<option value="${classTable.status }">${classTable.status }</option> --%>
+<%-- 								<c:choose> --%>
+<%-- 									<c:when test="${classTable.status }"> --%>
+<!-- 										<option value="false">false</option> -->
+<%-- 									</c:when> --%>
+<%-- 									<c:otherwise> --%>
+<!-- 										<option value="true">true</option> -->
+<%-- 									</c:otherwise> --%>
+<%-- 								</c:choose> --%>
+<!-- 						</select></td> -->
 					</tr>
 
 				</tbody>

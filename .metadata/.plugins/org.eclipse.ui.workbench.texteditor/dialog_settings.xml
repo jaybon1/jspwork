@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="pid"/>
+		<item key="selection" value="&quot;&quot;+today.getHours()+today.getMinutes()*1"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="true"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="hi"/>
+			<item value="&quot;&quot;+today.getHours()+today.getMinutes()"/>
+			<item value="&quot;&quot;+today.getHours()+today.getMinutes())"/>
+			<item value="Integer.parseInt(classTimeString"/>
+			<item value="출처"/>
+			<item value="sys"/>
+			<item value="sout"/>
 			<item value="pud"/>
 			<item value="pid"/>
 			<item value="i"/>
@@ -16,22 +23,17 @@
 			<item value="br"/>
 			<item value="dt"/>
 			<item value="userprofile"/>
-			<item value="welcome"/>
-			<item value="session"/>
-			<item value="한화"/>
-			<item value="뉴스토픽"/>
-			<item value="utf"/>
-			<item value="ch04"/>
-			<item value="ch"/>
 		</list>
 		<list key="replacehistory">
+			<item value="&quot;&quot;+today.getHours()+today.getMinutes()*1"/>
+			<item value="&quot;&quot;+today.getHours()+today.getMinutes()"/>
 			<item value="pnds"/>
 			<item value=""/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="710"/>
-		<item key="DIALOG_Y_ORIGIN" value="200"/>
+		<item key="DIALOG_X_ORIGIN" value="1211"/>
+		<item key="DIALOG_Y_ORIGIN" value="188"/>
 		<item key="DIALOG_WIDTH" value="271"/>
 		<item key="DIALOG_HEIGHT" value="391"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>

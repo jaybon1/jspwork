@@ -12,8 +12,11 @@ import com.bitc.practiceProgress.action.Action;
 import com.bitc.practiceProgress.action.PracticeTableAction.PracticeTableActivateProcAction;
 import com.bitc.practiceProgress.action.PracticeTableAction.PracticeTableAddExcelAction;
 import com.bitc.practiceProgress.action.PracticeTableAction.PracticeTableAddExcelProcAction;
+import com.bitc.practiceProgress.action.PracticeTableAction.PracticeTableChangeExcelAction;
+import com.bitc.practiceProgress.action.PracticeTableAction.PracticeTableChangeExcelProcAction;
 import com.bitc.practiceProgress.action.PracticeTableAction.PracticeTableDeActivateProcAction;
 import com.bitc.practiceProgress.action.PracticeTableAction.PracticeTableInputAction;
+import com.bitc.practiceProgress.action.PracticeTableAction.PracticeTableStatisticsAction;
 
 // http://localhost:8000/blog/user
 @WebServlet("/practicetable")
@@ -55,6 +58,12 @@ public class PracticeTableController extends HttpServlet {
 			return new PracticeTableAddExcelAction();
 		} else if (cmd.equals("addExcelProc")) {
 			return new PracticeTableAddExcelProcAction();
+		} else if (cmd.equals("changeExcel")) {
+			return new PracticeTableChangeExcelAction();
+		} else if (cmd.equals("changeExcelProc")) {
+			return new PracticeTableChangeExcelProcAction();
+		} else if (cmd.equals("statistics")) {
+			return new PracticeTableStatisticsAction();
 		}
 
 		return null;

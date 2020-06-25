@@ -23,177 +23,103 @@ td {
 
 </style>
 
-<div class="container-fluid" style="font-size: 10px;">
+<div class="container-fluid" style="font-size: 12px;">
 	<h2>훈련진행상황</h2>
 	<br />
 	<table class="table table-bordered text-center">
 		<thead>
 			<tr style="font-size: 16px">
 				<th> </th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(0).room})">402호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(1).room})">403호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(2).room})">404호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(3).room})">405호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(4).room})">501호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(5).room})">502호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(6).room})">503호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(7).room})">504호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(8).room})">505호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(9).room})">506호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(10).room})">507호</th>
-				<th style="cursor: pointer;" onclick="detail(${pids.get(11).room})">508호</th>
+				<th>402호</th>
+				<th>403호</th>
+				<th>404호</th>
+				<th>405호</th>
+				<th>501호</th>
+				<th>502호</th>
+				<th>503호</th>
+				<th>504호</th>
+				<th>505호</th>
+				<th>506호</th>
+				<th>507호</th>
+				<th>508호</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
 				<td> </td>
 				<c:forEach var="pid" items="${pids}">
-					<td>${pid.className}</td>
+					<td><b>${pid.className}</b></td>
 				</c:forEach>
-
 			</tr>
 			<tr>
 				<td> </td>
 				<c:forEach var="pid" items="${pids}">
-					<td>${pid.homeroomProf}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<td rowspan="3" style="height: ${pageScope.tdHeight}px">1</td>
-				<c:forEach var="ppd" items="${ppdsList.get(0)}">
-					<td>${ppd.subject1}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="ppd" items="${ppdsList.get(0)}">
-					<td>${ppd.subject2}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="ppd" items="${ppdsList.get(0)}">
-					<td>${ppd.prof}</td>
+					<td><b>${pid.homeroomProf}</b></td>
 				</c:forEach>
 			</tr>
 			
-			<tr>
-				<td rowspan="3" style="height: ${pageScope.tdHeight}px">2</td>
-				<c:forEach var="ppd" items="${ppdsList.get(1)}">
-					<td>${ppd.subject1}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="ppd" items="${ppdsList.get(1)}">
-					<td>${ppd.subject2}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="ppd" items="${ppdsList.get(1)}">
-					<td>${ppd.prof}</td>
-				</c:forEach>
-			</tr>
-			
-			<tr>
-				<td rowspan="3" style="height: ${pageScope.tdHeight}px">3</td>
-				<c:forEach var="ppd" items="${ppdsList.get(2)}">
-					<td>${ppd.subject1}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="ppd" items="${ppdsList.get(2)}">
-					<td>${ppd.subject2}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="ppd" items="${ppdsList.get(2)}">
-					<td>${ppd.prof}</td>
-				</c:forEach>
-			</tr>
-			
-			<tr>
-				<td rowspan="3" style="height: ${pageScope.tdHeight}px">4</td>
-				<c:forEach var="ppd" items="${ppdsList.get(3)}">
-					<td>${ppd.subject1}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="ppd" items="${ppdsList.get(3)}">
-					<td>${ppd.subject2}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="ppd" items="${ppdsList.get(3)}">
-					<td>${ppd.prof}</td>
-				</c:forEach>
-			</tr>
-			
-			<tr>
-				<td rowspan="3" style="height: ${pageScope.tdHeight}px">5</td>
-				<c:forEach var="ppd" items="${ppdsList.get(4)}">
-					<td>${ppd.subject1}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="ppd" items="${ppdsList.get(4)}">
-					<td>${ppd.subject2}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="ppd" items="${ppdsList.get(4)}">
-					<td>${ppd.prof}</td>
-				</c:forEach>
-			</tr>
-			
-			<tr>
-				<td rowspan="3" style="height: ${pageScope.tdHeight}px">6</td>
-				<c:forEach var="ppd" items="${ppdsList.get(5)}">
-					<td>${ppd.subject1}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="ppd" items="${ppdsList.get(5)}">
-					<td>${ppd.subject2}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="ppd" items="${ppdsList.get(5)}">
-					<td>${ppd.prof}</td>
-				</c:forEach>
-			</tr>
-			
-			<tr>
-				<td rowspan="3" style="height: ${pageScope.tdHeight}px">7</td>
-				<c:forEach var="ppd" items="${ppdsList.get(6)}">
-					<td>${ppd.subject1}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="ppd" items="${ppdsList.get(6)}">
-					<td>${ppd.subject2}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="ppd" items="${ppdsList.get(6)}">
-					<td>${ppd.prof}</td>
-				</c:forEach>
-			</tr>
-			
-			<tr>
-				<td rowspan="3" style="height: ${pageScope.tdHeight}px">8</td>
-				<c:forEach var="ppd" items="${ppdsList.get(7)}">
-					<td>${ppd.subject1}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="ppd" items="${ppdsList.get(7)}">
-					<td>${ppd.subject2}</td>
-				</c:forEach>
-			</tr>
-			<tr>
-				<c:forEach var="ppd" items="${ppdsList.get(7)}">
-					<td>${ppd.prof}</td>
-				</c:forEach>
-			</tr>
+			<c:forEach var="classTime" begin="1" end="8">
+				<tr  class="tuple_${classTime }">
+					<td rowspan="3" style="height: ${pageScope.tdHeight}px">${classTime }</td>
+					<c:forEach var="ppd" items="${ppdsList.get(classTime - 1)}">
+						<td>${ppd.subject1}</td>
+					</c:forEach>
+				</tr>
+				<tr class="tuple_${classTime }">
+					<c:forEach var="ppd" items="${ppdsList.get(classTime - 1)}">
+						<td>${ppd.subject2}</td>
+					</c:forEach>
+				</tr>
+				<tr class="tuple_${classTime }">
+					<c:forEach var="ppd" items="${ppdsList.get(classTime - 1)}">
+						<td>${ppd.prof}</td>
+					</c:forEach>
+				</tr>
+			</c:forEach>
+
 		</tbody>
 	</table>
 </div>
+
+<script type="text/javascript">
+	
+	function focusTime() {
+		let today = new Date();
+		
+		var classTime = 0;
+		
+		if(""+today.getHours()+today.getMinutes() >= 900 && ""+today.getHours()+today.getMinutes() < 1000) {
+			classTime = 1;
+		} else if(""+today.getHours()+today.getMinutes() >= 1000 && ""+today.getHours()+today.getMinutes() < 1100) {
+			classTime = 2;
+		} else if(""+today.getHours()+today.getMinutes() >= 1100 && ""+today.getHours()+today.getMinutes() < 1200) {
+			classTime = 3;
+		} else if(""+today.getHours()+today.getMinutes() >= 1200 && ""+today.getHours()+today.getMinutes() < 1340) {
+			classTime = 4;
+		} else if(""+today.getHours()+today.getMinutes() >= 1340 && ""+today.getHours()+today.getMinutes() < 1440) {
+			classTime = 5;
+		} else if(""+today.getHours()+today.getMinutes() >= 1440 && ""+today.getHours()+today.getMinutes() < 1540) {
+			classTime = 6;
+		} else if(""+today.getHours()+today.getMinutes() >= 1540 && ""+today.getHours()+today.getMinutes() < 1640) {
+			classTime = 7;
+		} else if(""+today.getHours()+today.getMinutes() >= 1640 && ""+today.getHours()+today.getMinutes() < 1740) {
+			classTime = 8;
+		}
+
+		for (var i = 1; i <= 8; i++) {
+			$(".tuple_"+i).css("background", "rgba(255,204,178,.2)");
+		}
+
+		$(".tuple_"+classTime).css("background", "rgba(178,204,255,.4)");
+		
+	}
+	
+	focusTime();
+	setInterval(focusTime, 60000);
+	
+	
+	
+
+</script>
+
 <%@include file="include/footer.jsp"%>

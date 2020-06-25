@@ -24,12 +24,11 @@ public class PracticeTableAddExcelProcAction implements Action{
 		
 		int classId;
 		String realPath = request.getServletContext().getRealPath("excelfile");
-		String contextPath = request.getServletContext().getContextPath();
+//		String contextPath = request.getServletContext().getContextPath();
 		String fileName = null;
 		String excelFile = null; // DB에 들어갈 변수 : 위치
 		
 		System.out.println(realPath);
-		System.out.println(contextPath);
 		
 		try {
 			MultipartRequest multi
@@ -61,29 +60,18 @@ public class PracticeTableAddExcelProcAction implements Action{
 				
 				ClassTableRepository classTableRepository = ClassTableRepository.getInstance();
 				
-				int classIdResult = classTableRepository.updateExcelName(multi.getFileNames().nextElement().toString(), classId);
+				int classIdResult = classTableRepository.updateExcelName(fileName, classId);
 				
 				if(classIdResult == 1) {
-					Script.putScript("데이터 저장에 성공하였습니다.", "opener.location.reload(); window.close();", response);
+					Script.putScript("데이터 등록에 성공하였습니다.", "opener.location.reload(); window.close();", response);
 				} else {
-					Script.back("데이터 저장에 성공하였으나 파일명을 등록하지 못하였습니다. 훈련과정등록 페이지에서 수정해주세요.", response);
+					Script.back("데이터 등록에 성공하였으나 파일명을 등록하지 못하였습니다. 훈련과정등록 페이지에서 수정해주세요.", response);
 				}
 				
 			} else {
-				Script.back("데이터 저장에 실패하였습니다.", response);
+				Script.back("데이터 등록에 실패하였습니다.", response);
 			}
 			
-			
-//			if(result == 1) {
-//				
-//				HttpSession session = request.getSession();
-//				Users principal = usersRepository.findById(id);
-//				session.setAttribute("principal", principal);
-//				
-//				Script.href("사진변경 완료", "/blog/index.jsp", response);
-//			} else {
-//				Script.back("사진 변경 실패", response);
-//			}
 			
 		} catch (Exception e) {
 			e.getStackTrace();

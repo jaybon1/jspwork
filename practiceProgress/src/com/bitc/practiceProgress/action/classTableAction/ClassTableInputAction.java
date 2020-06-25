@@ -24,25 +24,42 @@ public class ClassTableInputAction implements Action{
 		ClassTableRepository classTableRepository = ClassTableRepository.getInstance();
 		PracticeTableRepository practiceTableRepository = PracticeTableRepository.getInstance();
 		
-		int classTime = 1;
 		
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 		String classDate = formater.format(cal.getTime());
 		
-		List<Integer> idList = classTableRepository.findIdList();
 		
-		System.out.println(classDate);
+		SimpleDateFormat formater1 = new SimpleDateFormat("HHmm");
+		String classTimeString = formater1.format(cal.getTime());
+		
+		int classTime = 0;
+		
+		if(Integer.parseInt(classTimeString) >= 900 && Integer.parseInt(classTimeString) < 1000) {
+			classTime = 1;
+		} else if(Integer.parseInt(classTimeString) >= 1000 && Integer.parseInt(classTimeString) < 1100) {
+			classTime = 2;
+		} else if(Integer.parseInt(classTimeString) >= 1100 && Integer.parseInt(classTimeString) < 1200) {
+			classTime = 3;
+		} else if(Integer.parseInt(classTimeString) >= 1200 && Integer.parseInt(classTimeString) < 1340) {
+			classTime = 4;
+		} else if(Integer.parseInt(classTimeString) >= 1340 && Integer.parseInt(classTimeString) < 1440) {
+			classTime = 5;
+		} else if(Integer.parseInt(classTimeString) >= 1440 && Integer.parseInt(classTimeString) < 1540) {
+			classTime = 6;
+		} else if(Integer.parseInt(classTimeString) >= 1540 && Integer.parseInt(classTimeString) < 1640) {
+			classTime = 7;
+		} else if(Integer.parseInt(classTimeString) >= 1640 && Integer.parseInt(classTimeString) < 1740) {
+			classTime = 8;
+		}
+		
+		List<Integer> idList = classTableRepository.findIdList();
 		
 		List<ProgressInputDto> pids = classTableRepository.findClassNameHomeroomProf();
 		List<PracticeProgressDto> ppds = practiceTableRepository.findPracticeNow(classTime, classDate, idList);
 		
 		request.setAttribute("pids", pids);
 		request.setAttribute("ppds", ppds);
-		
-		for (PracticeProgressDto practiceProgressDto : ppds) {
-			System.out.println(practiceProgressDto.getSubject1());
-		}
 		
 		RequestDispatcher dis = request.getRequestDispatcher("/input/inputprogress.jsp");
 		dis.forward(request, response);

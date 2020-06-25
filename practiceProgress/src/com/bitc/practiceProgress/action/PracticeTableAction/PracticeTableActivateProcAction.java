@@ -1,6 +1,7 @@
 package com.bitc.practiceProgress.action.PracticeTableAction;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +16,19 @@ public class PracticeTableActivateProcAction implements Action{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		ClassTableRepository classTableRepository = ClassTableRepository.getInstance();
+		
+		List<Integer> trueRoomList = classTableRepository.findTrueRoomList();
+		
+		for (Integer integer : trueRoomList) {
+			if(Integer.parseInt(request.getParameter("room")) == integer) {
+				Script.outText(2+"", response);
+				return;
+			}
+		}
+		
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		ClassTableRepository classTableRepository = ClassTableRepository.getInstance();
 		
 		int result = classTableRepository.updateStatusTrue(id);
 		

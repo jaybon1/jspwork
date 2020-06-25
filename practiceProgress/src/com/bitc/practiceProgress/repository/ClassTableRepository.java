@@ -158,6 +158,48 @@ public class ClassTableRepository {
 		return -1; // 실패시
 	}
 	
+	public ClassTable findById(int id) {
+		final String SQL = "SELECT id, room, class_name, class_part, class_open, class_close, homeroom_prof, excel_name, status "
+				+ "FROM class_table WHERE id = ? ";
+		
+		ClassTable classTable = null;
+		
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, id);
+
+			rs = pstmt.executeQuery();
+			
+			classTable = new ClassTable();
+			
+			if (rs.next()) {
+				classTable = ClassTable.builder()
+						.id(rs.getInt(1))
+						.room(rs.getInt(2))
+						.className(rs.getString(3))
+						.classPart(rs.getString(4))
+						.classOpen(rs.getString(5))
+						.classClose(rs.getString(6))
+						.homeroomProf(rs.getString(7))
+						.excelName(rs.getString(8))
+						.status(rs.getString(9))
+						.build();
+			}
+		
+			return classTable;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "findById : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		
+		
+		return null;
+	}
+	
 	
 	public ClassTable findByRoom(int room) {
 		final String SQL = "SELECT id, room, class_name, class_part, class_open, class_close, homeroom_prof, excel_name, status "
@@ -230,6 +272,36 @@ public class ClassTableRepository {
 		}
 		
 		
+		return null;
+	}
+	
+	public List<Integer> findTrueRoomList() {
+		final String SQL = "SELECT room FROM class_table WHERE status = 'true' ";
+		
+		List<Integer> roomList = null;
+		
+		try {
+			conn = DBConn.getConnection(); // DB에 연결
+			pstmt = conn.prepareStatement(SQL);
+
+			rs = pstmt.executeQuery();
+			
+			roomList = new ArrayList<>();
+
+			while (rs.next()) {
+				
+				roomList.add(rs.getInt(1));
+				
+			}
+		
+			return roomList;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(TAG + "findIdList : " + e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
 		return null;
 	}
 	

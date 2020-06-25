@@ -1,6 +1,7 @@
 package com.bitc.practiceProgress.action.classTableAction;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,17 @@ public class ClassTableInputProcAction implements Action{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		ClassTableRepository classTableRepository = ClassTableRepository.getInstance();
+		
+		List<Integer> trueRoomList = classTableRepository.findTrueRoomList();
+		
+		for (Integer integer : trueRoomList) {
+			if(Integer.parseInt(request.getParameter("room")) == integer) {
+				Script.getMessage("잘못된 접근입니다.", response);
+				return;
+			}
+		}
+		
 		ClassTable classTable = ClassTable.builder()
 				.room(Integer.parseInt(request.getParameter("room")))
 				.className(request.getParameter("className"))
@@ -24,8 +36,6 @@ public class ClassTableInputProcAction implements Action{
 				.classClose(request.getParameter("classClose"))
 				.homeroomProf(request.getParameter("homeroomProf"))
 				.build();
-		
-		ClassTableRepository classTableRepository = ClassTableRepository.getInstance();
 		
 		int result = classTableRepository.save(classTable);
 		
