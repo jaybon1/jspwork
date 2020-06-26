@@ -30,11 +30,9 @@ public class PracticeTableRepository {
 	private ResultSet rs = null;
 	
 	
-	private int deleteNotAuto(int classId) {
+	private int deleteNotAuto(int classId, Connection conn) {
 		final String SQL = "DELETE FROM practice_table WHERE class_id = ?";
 		try {
-			conn = DBConn.getConnection(); // DB에 연결
-			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, classId);
 			
@@ -114,32 +112,37 @@ public class PracticeTableRepository {
 		
 		try {
 			
-			int deleteResult = deleteNotAuto(classId);
+			int deleteResult = deleteNotAuto(classId , conn);
 			
 			if (deleteResult > 0) {
 				
-				for (PracticeTable practiceTable : practiceTables) {
-					
-					pstmt = conn.prepareStatement(SQL);
-					pstmt.setString(1, practiceTable.getClassName());
-					pstmt.setString(2, practiceTable.getClassDate());
-					pstmt.setString(3, practiceTable.getDayWeek());
-					pstmt.setInt(4, practiceTable.getClassTime());
-					pstmt.setString(5, practiceTable.getStartTime());
-					pstmt.setString(6, practiceTable.getEndTime());
-					pstmt.setString(7, practiceTable.getSubject1());
-					pstmt.setString(8, practiceTable.getSubject2());
-					pstmt.setString(9, practiceTable.getProf());
-					pstmt.setInt(10, practiceTable.getRoom());
-					pstmt.setInt(11, classId);
-					
-					int result = pstmt.executeUpdate();
-					
-					if(result != 1) {
-						finalResult = 0;
-						break;
-					}	
+				if(practiceTables == null) {
+					finalResult = 0;
+				} else {
+					for (PracticeTable practiceTable : practiceTables) {
+						
+						pstmt = conn.prepareStatement(SQL);
+						pstmt.setString(1, practiceTable.getClassName());
+						pstmt.setString(2, practiceTable.getClassDate());
+						pstmt.setString(3, practiceTable.getDayWeek());
+						pstmt.setInt(4, practiceTable.getClassTime());
+						pstmt.setString(5, practiceTable.getStartTime());
+						pstmt.setString(6, practiceTable.getEndTime());
+						pstmt.setString(7, practiceTable.getSubject1());
+						pstmt.setString(8, practiceTable.getSubject2());
+						pstmt.setString(9, practiceTable.getProf());
+						pstmt.setInt(10, practiceTable.getRoom());
+						pstmt.setInt(11, classId);
+						
+						int result = pstmt.executeUpdate();
+						
+						if(result != 1) {
+							finalResult = 0;
+							break;
+						}	
+					}
 				}
+				
 			} else {
 				
 				finalResult = -1;
@@ -153,11 +156,10 @@ public class PracticeTableRepository {
 				conn.rollback();
 				System.out.println("롤백");
 			}
-			
 			return finalResult;
 			
 		} catch (Exception e) {
-			System.out.println(TAG + "saveList : " + e.getMessage());
+			System.out.println(TAG + "deleteAndSaveList : " + e.getMessage());
 		} finally {
 			DBConn.close(conn, pstmt);
 		}
@@ -182,28 +184,33 @@ public class PracticeTableRepository {
 		
 		try {
 			
-			for (PracticeTable practiceTable : practiceTables) {
-				
-				pstmt = conn.prepareStatement(SQL);
-				pstmt.setString(1, practiceTable.getClassName());
-				pstmt.setString(2, practiceTable.getClassDate());
-				pstmt.setString(3, practiceTable.getDayWeek());
-				pstmt.setInt(4, practiceTable.getClassTime());
-				pstmt.setString(5, practiceTable.getStartTime());
-				pstmt.setString(6, practiceTable.getEndTime());
-				pstmt.setString(7, practiceTable.getSubject1());
-				pstmt.setString(8, practiceTable.getSubject2());
-				pstmt.setString(9, practiceTable.getProf());
-				pstmt.setInt(10, practiceTable.getRoom());
-				pstmt.setInt(11, classId);
-				
-				int result = pstmt.executeUpdate();
-				
-				if(result != 1) {
-					finalResult = 0;
-					break;
-				}	
+			if(practiceTables == null) {
+				finalResult = 0;
+			} else {
+				for (PracticeTable practiceTable : practiceTables) {
+					
+					pstmt = conn.prepareStatement(SQL);
+					pstmt.setString(1, practiceTable.getClassName());
+					pstmt.setString(2, practiceTable.getClassDate());
+					pstmt.setString(3, practiceTable.getDayWeek());
+					pstmt.setInt(4, practiceTable.getClassTime());
+					pstmt.setString(5, practiceTable.getStartTime());
+					pstmt.setString(6, practiceTable.getEndTime());
+					pstmt.setString(7, practiceTable.getSubject1());
+					pstmt.setString(8, practiceTable.getSubject2());
+					pstmt.setString(9, practiceTable.getProf());
+					pstmt.setInt(10, practiceTable.getRoom());
+					pstmt.setInt(11, classId);
+					
+					int result = pstmt.executeUpdate();
+					
+					if(result != 1) {
+						finalResult = 0;
+						break;
+					}	
+				}
 			}
+			
 			if(finalResult == 1) {
 				conn.commit();
 				System.out.println("커밋");
@@ -338,7 +345,7 @@ public class PracticeTableRepository {
 		System.out.println(sb.toString());
 		
 		final String SQL = "SELECT room, subject1, subject2, prof, class_time FROM practice_table "
-				+ "WHERE class_date = ? "
+				+ "WHERE prof IS NOT NULL AND class_date = ? "
 				+ sb.toString();
 		
 		List<List<PracticeProgressDto>> ppdsList = null;
@@ -374,41 +381,41 @@ public class PracticeTableRepository {
 					break;
 				}
 				
-				int classTime = -1;
+				int rommNum = -1;
 				
 				if(rs.getInt(1) == 402) {
-					classTime = 0;
+					rommNum = 0;
 				} else if (rs.getInt(1) == 403) {
-					classTime = 1;
+					rommNum = 1;
 				} else if (rs.getInt(1) == 404) {
-					classTime = 2;
+					rommNum = 2;
 				} else if (rs.getInt(1) == 405) {
-					classTime = 3;
+					rommNum = 3;
 				} else if (rs.getInt(1) == 501) {
-					classTime = 4;
+					rommNum = 4;
 				} else if (rs.getInt(1) == 502) {
-					classTime = 5;
+					rommNum = 5;
 				} else if (rs.getInt(1) == 503) {
-					classTime = 6;
+					rommNum = 6;
 				} else if (rs.getInt(1) == 504) {
-					classTime = 7;
+					rommNum = 7;
 				} else if (rs.getInt(1) == 505) {
-					classTime = 8;
+					rommNum = 8;
 				} else if (rs.getInt(1) == 506) {
-					classTime = 9;
+					rommNum = 9;
 				} else if (rs.getInt(1) == 507) {
-					classTime = 10;
+					rommNum = 10;
 				} else if (rs.getInt(1) == 508) {
-					classTime = 11;
+					rommNum = 11;
 				}
 				
-				if(classTime == -1) {
+				if(rommNum == -1) {
 					break;
 				}
 				
-				ppdsList.get(rs.getInt(5)-1).get(classTime).setSubject1(rs.getString(2));
-				ppdsList.get(rs.getInt(5)-1).get(classTime).setSubject2(rs.getString(3));
-				ppdsList.get(rs.getInt(5)-1).get(classTime).setProf(rs.getString(4));
+				ppdsList.get(rs.getInt(5)-1).get(rommNum).setSubject1(rs.getString(2));
+				ppdsList.get(rs.getInt(5)-1).get(rommNum).setSubject2(rs.getString(3));
+				ppdsList.get(rs.getInt(5)-1).get(rommNum).setProf(rs.getString(4));
 				
 			}
 					

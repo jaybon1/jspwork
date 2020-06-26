@@ -351,7 +351,7 @@ public class ClassTableRepository {
 	
 	public List<ClassTable> findFalseClass() {
 		final String SQL = "SELECT id, room, class_name, class_part, class_open, class_close, homeroom_prof, excel_name, status "
-				+ "FROM class_table WHERE status = 'false' ORDER BY class_open DESC ";
+				+ "FROM class_table WHERE status = 'false' and class_close > date_sub(curdate(), INTERVAL 1 YEAR) ORDER BY class_open DESC ";
 		
 		List<ClassTable> classTables = null;
 		

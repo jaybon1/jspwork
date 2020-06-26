@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="&quot;&quot;+today.getHours()+today.getMinutes()*1"/>
+		<item key="selection" value="hhmm"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="true"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="hi"/>
+			<item value="parseInt(&quot;&quot;+today.getHours()+today.getMinutes())"/>
 			<item value="&quot;&quot;+today.getHours()+today.getMinutes()"/>
+			<item value="hi"/>
 			<item value="&quot;&quot;+today.getHours()+today.getMinutes())"/>
 			<item value="Integer.parseInt(classTimeString"/>
 			<item value="출처"/>
@@ -22,9 +23,10 @@
 			<item value="style=&quot;width: 8.3%&quot;"/>
 			<item value="br"/>
 			<item value="dt"/>
-			<item value="userprofile"/>
 		</list>
 		<list key="replacehistory">
+			<item value="hhmm"/>
+			<item value="parseInt(&quot;&quot;+today.getHours()+today.getMinutes())"/>
 			<item value="&quot;&quot;+today.getHours()+today.getMinutes()*1"/>
 			<item value="&quot;&quot;+today.getHours()+today.getMinutes()"/>
 			<item value="pnds"/>

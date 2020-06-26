@@ -29,7 +29,7 @@ td {
 	<table class="table table-bordered text-center">
 		<thead>
 			<tr style="font-size: 16px">
-				<th> </th>
+				<th style="width: 3%"> </th>
 				<th>402호</th>
 				<th>403호</th>
 				<th>404호</th>
@@ -46,21 +46,20 @@ td {
 		</thead>
 		<tbody>
 			<tr>
-				<td> </td>
+				<td>훈련명</td>
 				<c:forEach var="pid" items="${pids}">
 					<td><b>${pid.className}</b></td>
 				</c:forEach>
 			</tr>
 			<tr>
-				<td> </td>
+				<td>담임</td>
 				<c:forEach var="pid" items="${pids}">
 					<td><b>${pid.homeroomProf}</b></td>
 				</c:forEach>
 			</tr>
-			
 			<c:forEach var="classTime" begin="1" end="8">
 				<tr  class="tuple_${classTime }">
-					<td rowspan="3" style="height: ${pageScope.tdHeight}px">${classTime }</td>
+					<td rowspan="3" style="height: ${pageScope.tdHeight}px; vertical-align: middle;">${classTime }</td>
 					<c:forEach var="ppd" items="${ppdsList.get(classTime - 1)}">
 						<td>${ppd.subject1}</td>
 					</c:forEach>
@@ -84,25 +83,30 @@ td {
 <script type="text/javascript">
 	
 	function focusTime() {
-		let today = new Date();
+		var today = new Date();
+		
+		var hour = ""+today.getHours();
+		var minute = today.getMinutes() < 10 ?"0"+today.getMinutes():""+today.getMinutes();
+		var hhmm = Number(hour + minute);
+		console.log(hhmm);
 		
 		var classTime = 0;
 		
-		if(""+today.getHours()+today.getMinutes() >= 900 && ""+today.getHours()+today.getMinutes() < 1000) {
+		if(hhmm >= 900 && hhmm < 1000) {
 			classTime = 1;
-		} else if(""+today.getHours()+today.getMinutes() >= 1000 && ""+today.getHours()+today.getMinutes() < 1100) {
+		} else if(hhmm >= 1000 && hhmm < 1100) {
 			classTime = 2;
-		} else if(""+today.getHours()+today.getMinutes() >= 1100 && ""+today.getHours()+today.getMinutes() < 1200) {
+		} else if(hhmm >= 1100 && hhmm < 1200) {
 			classTime = 3;
-		} else if(""+today.getHours()+today.getMinutes() >= 1200 && ""+today.getHours()+today.getMinutes() < 1340) {
+		} else if(hhmm >= 1200 && hhmm < 1340) {
 			classTime = 4;
-		} else if(""+today.getHours()+today.getMinutes() >= 1340 && ""+today.getHours()+today.getMinutes() < 1440) {
+		} else if(hhmm >= 1340 && hhmm < 1440) {
 			classTime = 5;
-		} else if(""+today.getHours()+today.getMinutes() >= 1440 && ""+today.getHours()+today.getMinutes() < 1540) {
+		} else if(hhmm >= 1440 && hhmm < 1540) {
 			classTime = 6;
-		} else if(""+today.getHours()+today.getMinutes() >= 1540 && ""+today.getHours()+today.getMinutes() < 1640) {
+		} else if(hhmm >= 1540 && hhmm < 1640) {
 			classTime = 7;
-		} else if(""+today.getHours()+today.getMinutes() >= 1640 && ""+today.getHours()+today.getMinutes() < 1740) {
+		} else if(hhmm >= 1640 && hhmm < 1740) {
 			classTime = 8;
 		}
 
@@ -117,9 +121,6 @@ td {
 	focusTime();
 	setInterval(focusTime, 60000);
 	
-	
-	
-
 </script>
 
 <%@include file="include/footer.jsp"%>

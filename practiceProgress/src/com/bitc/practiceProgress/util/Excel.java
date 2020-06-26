@@ -54,27 +54,46 @@ public class Excel {
 					if (cell == null || cell.toString().equals("")) {
 						continue;
 					}
+					
+					
+//					if(columnindex == 1) { // 날짜를 yyyy-MM-dd 형식으로 바꾸어서 넣는다
+//						
+//						Calendar cal = Calendar.getInstance();
+//						SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+//						colData = formater.format(cell.getDateCellValue());
+//
+//					} else if(columnindex == 2) { // 데이터가 [월] 과 같은 일반데이터와 [=C11]과 같은 레퍼런스데이터가 섞여있을 경우 아래와같이 불러온다
+//						
+//						colData = cell.getStringCellValue();
+//						
+//					} else if(columnindex == 0 || columnindex == 6 || columnindex == 7 || columnindex == 8) { // 문자열의 경우 아래와같이
+//						
+//						colData = cell.toString();
+//						
+//					} else { // 숫자는 내용그대로 가져오기위해서 아래와 같이
+//						
+//						colData = cell.getRawValue().toString();
+//						
+//					}
+					
+					
 					if(columnindex == 1) { // 날짜를 yyyy-MM-dd 형식으로 바꾸어서 넣는다
 						
 						Calendar cal = Calendar.getInstance();
 						SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 						colData = formater.format(cell.getDateCellValue());
 
-					} else if(columnindex == 2) { // 데이터가 [월] 과 같은 일반데이터와 [=C11]과 같은 레퍼런스데이터가 섞여있을 경우 아래와같이 불러온다
+					} else if(columnindex == 3 || columnindex == 4 || columnindex == 5 || columnindex == 9) { // 숫자의 경우
+						
+						colData = cell.getRawValue();
+						
+					} else { // 문자열
 						
 						colData = cell.getStringCellValue();
 						
-					} else if(columnindex == 0 || columnindex == 6 || columnindex == 7 || columnindex == 8) { // 문자열의 경우 아래와같이
-						
-						colData = cell.toString();
-						
-					} else { // 숫자는 내용그대로 가져오기위해서 아래와 같이
-						
-						colData = cell.getRawValue().toString();
-						
 					}
 					
-					
+
 					if (columnindex == 0) {
 						practiceTable.setClassName(colData);
 					} else if (columnindex == 1) {
@@ -96,6 +115,7 @@ public class Excel {
 					} else if (columnindex == 9) {
 						practiceTable.setRoom(Integer.parseInt(colData));
 					}
+					
 				}
 				practiceTables.add(practiceTable);
 			}

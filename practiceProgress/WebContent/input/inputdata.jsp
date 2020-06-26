@@ -3,7 +3,9 @@
 
 	<div class="container">
 		<h2>현재 과정</h2>
+		<br />
 		<p>아래 사항들을 확인하고 엑셀 데이터를 세팅해주세요</p>
+		<br />
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -44,6 +46,8 @@
 	<br/>
 	<div class="container">
 		<h2>비활성 과정</h2>
+		<br />
+		<p>훈련 기간이 최근 1년 이내인 훈련만 나타납니다.</p>
 		<br />
 		<table class="table table-striped">
 			<thead>
@@ -94,7 +98,7 @@
 			
 			var popupX = (document.body.offsetWidth / 2) - (700 / 2);
 
-			var popupY = (window.screen.height / 2) - (750 / 2);
+			var popupY = (window.screen.height / 2) - (630 / 2);
 			
 			var pop = window.open("/practiceProgress/practicetable?cmd=changeExcel&id="+id, "pop",
 			"width=700, height=630, left="+ popupX + ", top="+ popupY+", scrollbars=yes, resizable=yes");
@@ -107,10 +111,10 @@
 			
 			var popupX = (document.body.offsetWidth / 2) - (570 / 2);
 
-			var popupY = (window.screen.height / 2) - (400 / 2);
+			var popupY = (window.screen.height / 2) - (300 / 2);
 			
 			var pop = window.open("/practiceProgress/practicetable?cmd=addExcel&id="+id, "pop",
-			"width=570, height=400, left="+ popupX + ", top="+ popupY+", scrollbars=yes, resizable=yes");
+			"width=570, height=300, left="+ popupX + ", top="+ popupY+", scrollbars=yes, resizable=yes");
 			
 		}
 	

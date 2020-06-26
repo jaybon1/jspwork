@@ -18,7 +18,8 @@
 	<br />
 	  <h2>${classTable.room }호 엑셀 데이터 변경</h2>
 	  	<br />
-	  <h4>훈련명: ${classTable.className }</h4>
+	  <h4>훈련명:</h4>
+	  <h5>${classTable.className }</h5>
 	  <h4>담임: ${classTable.homeroomProf }</h4>
 	  	<br />
 	  <p>기존 훈련의 엑셀 데이터를 삭제하고 새 데이터를 입력합니다.</p>
@@ -28,7 +29,9 @@
 	      <input type="file" class="form-control-file border" name="file">
 	      <input type="hidden" value="${id }" name="id">
 	    </div>
-	    <button type="submit" class="btn btn-primary">변경하기</button>
+	    <div class="text-center">
+	    	<button type="submit" class="btn btn-outline-primary">변경하기</button>
+	    </div>
 	  </form>
 	  <br />
 	  <br />

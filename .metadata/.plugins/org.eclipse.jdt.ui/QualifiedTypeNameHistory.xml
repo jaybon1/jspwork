@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.io.OutputStreamWriter"/>
-<fullyQualifiedTypeName name="java.io.BufferedReader"/>
 <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
 <fullyQualifiedTypeName name="com.cos.blog.model.KakaoToken"/>
 <fullyQualifiedTypeName name="com.cos.blog.dto.KakaoToken"/>
@@ -32,7 +30,6 @@
 <fullyQualifiedTypeName name="oracle.net.aso.c"/>
 <fullyQualifiedTypeName name="com.bitc.practiceProgress.repository.ProgressRepository"/>
 <fullyQualifiedTypeName name="com.bitc.practiceProgress.dto.ProgressInputDto"/>
-<fullyQualifiedTypeName name="com.bitc.practiceProgress.util.Script"/>
 <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
 <fullyQualifiedTypeName name="com.bitc.practiceProgress.dto.ProgressNowDto"/>
 <fullyQualifiedTypeName name="java.lang.Appendable"/>
@@ -54,10 +51,13 @@
 <fullyQualifiedTypeName name="com.bitc.practiceProgress.dto.ProfServiceTimeDto"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="java.net.URL"/>
 <fullyQualifiedTypeName name="org.jsoup.Jsoup"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="org.jsoup.nodes.Document"/>
 <fullyQualifiedTypeName name="org.jsoup.select.Elements"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="java.lang.Double"/>
+<fullyQualifiedTypeName name="com.bitc.practiceProgress.util.Script"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
 </qualifiedTypeNameHistroy>

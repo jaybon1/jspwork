@@ -18,10 +18,10 @@
 		<ul class="list-group">
 			<li class="list-group-item"><c:choose>
 					<c:when test="${sameServiceTime }">
-						<b style="color: green;">총시수와 선생님들의 시수의 합이 같습니다.</b>
+						<b style="color: green;">총시수와 선생님들 시수의 합이 같습니다.</b>
 					</c:when>
 					<c:otherwise>
-						<b style="color: red">총시수와 선생님들의 시수의 합이 다릅니다.</b><br/>
+						<b style="color: red">총시수와 선생님들 시수의 합이 다릅니다.</b><br/>
 						<b style="color: red">엑셀 데이터를 확인하세요.</b>
 					</c:otherwise>
 				</c:choose></li>

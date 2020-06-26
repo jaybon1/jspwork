@@ -25,7 +25,7 @@ thead tr th:hover {
 
 </style>
 
-<div class="container-fluid">
+<div class="container">
 	<h2>훈련과정 등록</h2>
 	<br />
 	<form action="/practiceProgress/classtable?cmd=inputProc" method="post">
@@ -80,11 +80,13 @@ thead tr th:hover {
 			<input name="homeroomProf" type="text" class="form-control" placeholder="이름을 입력하세요" required="required">
 			
 		</div>
-		<div>
-			<input class="float-right" type="submit" value="등록하기">
+		<div class="text-center">
+			<input class="btn btn-outline-primary" type="submit" value="등록하기">
 		</div>
 	</form>
 	<br /> <br />
+</div>
+<div class="container-fluid">
 	<h3>현시간 훈련진행상황</h3>
 	<br />
 	<p>호실을 누르면 상세보기 화면을 보실 수 있습니다</p>
@@ -161,7 +163,7 @@ thead tr th:hover {
 		
 		// - (570 / 2) 등은 창 위치 조정을 위함
 		
-		var popupX = (document.body.offsetWidth / 2) - (570 / 2);
+		var popupX = (document.body.offsetWidth / 2) - (770 / 2);
 
 		var popupY = (window.screen.height / 2) - (800 / 2);
 		

@@ -16,13 +16,17 @@
 	<div class="container">
 	<br />
 	  <h2>엑셀 데이터 등록하기</h2>
+	  <br />
 	  <p>엑셀 파일을 등록하세요</p>
+	  <br />
 	  <form action="/practiceProgress/practicetable?cmd=addExcelProc" method="post" enctype="multipart/form-data">
 	    <div class="form-group">
 	      <input type="file" class="form-control-file border" name="file">
 	      <input type="hidden" value="${id }" name="id">
 	    </div>
-	    <button type="submit" class="btn btn-primary">등록하기</button>
+	    <div class="text-center">
+	    	<button type="submit" class="btn btn-outline-primary">등록하기</button>
+	    </div>
 	  </form>
 	</div>
 

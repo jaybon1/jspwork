@@ -49,7 +49,14 @@ public class PracticeTableChangeExcelProcAction implements Action{
 			
 			excelFile = realPath +"\\"+ fileName;
 			
-			List<PracticeTable> practiceTables = Excel.getList(excelFile);
+			List<PracticeTable> practiceTables = null;
+			
+			try {
+				practiceTables = Excel.getList(excelFile);
+			} catch (Exception e) {
+				e.getStackTrace();
+				practiceTables = null;
+			}
 			
 			PracticeTableRepository practiceTableRepository = PracticeTableRepository.getInstance();
 			
@@ -61,14 +68,15 @@ public class PracticeTableChangeExcelProcAction implements Action{
 				
 				int classIdResult = classTableRepository.updateExcelName(fileName, classId);
 				
+				
 				if(classIdResult == 1) {
 					Script.putScript("데이터 변경에 성공하였습니다.", "opener.location.reload(); window.close();", response);
 				} else {
-					Script.back("데이터 변경에 성공하였으나 파일명을 등록하지 못하였습니다. 훈련과정등록 페이지에서 수정해주세요.", response);
+					Script.back("데이터 변경에 성공하였으나 파일명을 등록하지 못하였습니다.\\n훈련과정등록 페이지에서 수정해주세요.", response);
 				}
 				
 			} else {
-				Script.back("데이터 변경에 실패하였습니다.", response);
+				Script.back("데이터 변경에 실패하였습니다.\\n엑셀 파일을 확인해주세요.\\n(데이터 일괄 변경시 [완전히 같은 단어 찾기]를 이용하세요)", response);
 			}
 			
 			

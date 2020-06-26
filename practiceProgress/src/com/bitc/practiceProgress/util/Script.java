@@ -46,8 +46,8 @@ public class Script {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('" + msg + "')");
-			out.println("history.back()");
+			out.println("alert('" + msg + "');");
+			out.println("history.back();");
 			out.println("</script>");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,7 +61,7 @@ public class Script {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('" + msg + "')");
+			out.println("alert('" + msg + "');");
 			out.println("location.href='"+uri+"';");
 			out.println("</script>");
 		} catch (Exception e) {
@@ -92,7 +92,7 @@ public class Script {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('" + msg + "')");
+			out.println("alert('" + msg + "');");
 			out.println(scriptText);
 			out.println("</script>");
 		} catch (Exception e) {
